@@ -1,0 +1,32 @@
+﻿
+@model NzKvoDaQm.Models.ViewModels.SearchViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            @using (Html.BeginRouteForm("search", FormMethod.Get))
+            {
+                @Html.TextBox("search", null, new
+                                              {
+                                                  @id = "searchbox"
+                                              })
+            }
+        </div>
+    </div>
+    @for (var i = 0; i < @Model.Recipes.Length; i += 3)
+    {
+        var recipesToRender = @Model.Recipes.Skip(i)
+            .Take(3)
+            .ToArray(); 
+
+        <div class="row">
+            <div class="col-md-3">@recipesToRender[0].Title</div>
+            <div class="col-md-3 col-md-offset-1">@recipesToRender[1].Title</div>
+            <div class="col-md-3 col-md-offset-1">@recipesToRender[2].Title</div>
+        </div>
+    }
+</div>
+
