@@ -2,6 +2,7 @@
 {
 
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using NzKvoDaQm.Models.ViewModels;
@@ -13,21 +14,25 @@
             get; set;
         }
 
+        [Required]
+        [MinLength(4)]
         public string Title
         {
             get; set;
         }
-
-        public virtual string[] ImagesUrls
+        
+        public string[] ImagesUrls
         {
             get; set;
         }
 
-        public virtual IList<string> Steps
+        [Required]
+        public virtual IList<RecipeStep> Steps
         {
             get; set;
         }
 
+        [Range(5, int.MaxValue)]
         public int MinutesRequiredToCook
         {
             get; set;
@@ -40,12 +45,6 @@
 
         [InverseProperty("Recipes")]
         public virtual ApplicationUser Author
-        {
-            get; set;
-        }
-
-
-        public virtual Refrigerator MyRefrigerator
         {
             get; set;
         }
