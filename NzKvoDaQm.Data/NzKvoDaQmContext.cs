@@ -7,14 +7,14 @@ namespace NzKvoDaQm.Data
     using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Models.ViewModels;
 
-    public class NzKvoDaQmContext : IdentityDbContext<ApplicationUser>
+    public class NzKvoDaQmContext : IdentityDbContext<ApplicationUser>, IDbContext
     {
         public NzKvoDaQmContext()
             : base("name=NzKvoDaQmContext")
         {
         }
 
-        public static NzKvoDaQmContext Create()
+        public static IDbContext Create()
         {
             return new NzKvoDaQmContext();
         }

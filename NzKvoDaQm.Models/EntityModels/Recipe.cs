@@ -48,6 +48,9 @@
         {
             get; set;
         }
+
+        [Required]
+        public IList<Product> Products { get; set; }
     }
 
 }
