@@ -10,6 +10,11 @@
 
     public interface IDbContext
     {
+        IDbSet<RecipeStep> RecipeSteps
+        {
+            get; set;
+        }
+
         IDbSet<Comment> Comments
         {
             get; set;
@@ -29,12 +34,7 @@
         {
             get; set;
         }
-
-        IDbSet<Refrigerator> Refrigerators
-        {
-            get; set;
-        }
-
+        
         IDbSet<Review> Reviews
         {
             get; set;
@@ -49,5 +49,7 @@
         {
             get; set;
         }
+
+        int SaveChanges();
     }
 }

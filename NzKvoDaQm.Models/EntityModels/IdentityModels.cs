@@ -14,20 +14,28 @@
 
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
-    {   
-        public virtual IList<Recipe> Recipes { get; set; }
+    {
+        public virtual IList<Recipe> Recipes
+        {
+            get; set;
+        }
 
-        public virtual IList<Review> Reviews { get; set; }
+        public virtual IList<Review> Reviews
+        {
+            get; set;
+        }
 
-        [Required]
-        public virtual Refrigerator Refrigerator { get; set; }
+        public virtual IList<Product> ProductsInFridge
+        {
+            get; set;
+        }
 
         public ApplicationUser()
         {
             this.Recipes = new List<Recipe>();
-            this.Reviews = new List<Review>();    
+            this.Reviews = new List<Review>();
         }
-        
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

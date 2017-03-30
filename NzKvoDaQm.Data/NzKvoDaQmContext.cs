@@ -14,9 +14,14 @@ namespace NzKvoDaQm.Data
         {
         }
 
-        public static IDbContext Create()
+        public static NzKvoDaQmContext Create()
         {
             return new NzKvoDaQmContext();
+        }
+
+        public virtual IDbSet<RecipeStep> RecipeSteps
+        {
+            get; set;
         }
 
         public virtual IDbSet<Comment> Comments
@@ -38,12 +43,7 @@ namespace NzKvoDaQm.Data
         {
             get; set;
         }
-
-        public virtual IDbSet<Refrigerator> Refrigerators
-        {
-            get; set;
-        }
-
+        
         public virtual IDbSet<Review> Reviews
         {
             get; set;
