@@ -29,7 +29,7 @@ namespace NzKvoDaQm.Data
             get; set;
         }
 
-        public virtual IDbSet<Product> Products
+        public virtual IDbSet<Ingredient> Products
         {
             get; set;
         }

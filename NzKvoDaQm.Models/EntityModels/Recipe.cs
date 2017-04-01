@@ -50,7 +50,7 @@
         }
 
         [Required]
-        public IList<Product> Products { get; set; }
+        public IList<Ingredient> Products { get; set; }
     }
 
 }

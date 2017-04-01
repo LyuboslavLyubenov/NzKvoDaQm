@@ -3,7 +3,7 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    public class Product
+    public class Ingredient
     {
         public int Id
         {

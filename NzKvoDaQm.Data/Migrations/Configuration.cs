@@ -130,39 +130,39 @@ namespace NzKvoDaQm.Data.Migrations
 
         private void AddRecipeForSpaghettiWithTomatoSauceToDatabase(IDbContext context)
         {
-            var spaghetti = new Product()
+            var spaghetti = new Ingredient()
             {
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Спагети".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 500
             };
 
-            var onions = new Product()
+            var onions = new Ingredient()
             {
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Лук".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 100
             };
 
-            var garlic = new Product()
+            var garlic = new Ingredient()
             {
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Чесън".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 20
             };
-            var tomato = new Product()
+            var tomato = new Ingredient()
             {
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Домат".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 500
             };
-            var tomatoSauce = new Product()
+            var tomatoSauce = new Ingredient()
             {
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Доматен сок".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Milliliter,
                 Quantity = 300
             };
-            var water = new Product()
+            var water = new Ingredient()
             {
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Вода".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Liter,
