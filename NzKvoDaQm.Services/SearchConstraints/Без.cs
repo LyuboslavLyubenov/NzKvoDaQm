@@ -13,6 +13,11 @@
 
         public Без(string bannedWords)
         {
+            if (string.IsNullOrWhiteSpace(bannedWords))
+            {
+                throw new ArgumentException();
+            }
+
             this.bannedWords = bannedWords.Split(
                 new char[]
                 {
@@ -20,8 +25,14 @@
                     ','
                 },
                 StringSplitOptions.RemoveEmptyEntries)
+                .Where(w => !string.IsNullOrWhiteSpace(w))
                 .Select(w => w.Trim().ToUpper())
                 .ToList();
+
+            if (this.bannedWords.Count == 0)
+            {
+                throw new ArgumentException("Must contain words");
+            }
         }
         
         public bool IsAllowed(Recipe recipe)

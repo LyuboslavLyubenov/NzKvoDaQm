@@ -67,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchConstraints\ISearchConstraint.cs" />
     <Compile Include="SearchConstraints\Без.cs" />
+    <Compile Include="SearchConstraints\За.cs" />
     <Compile Include="SearchQuery.cs" />
     <Compile Include="SearchService.cs" />
     <Compile Include="Service.cs" />

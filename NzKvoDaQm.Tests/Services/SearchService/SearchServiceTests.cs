@@ -1,13 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace NzKvoDaQm.Tests.Services
+﻿namespace NzKvoDaQm.Tests.Services.SearchService
 {
 
-    using System.Collections.Generic;
     using System.Data.Entity;
-    using System.Data.Entity.Migrations;
     using System.Linq;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Moq;
 
@@ -15,7 +12,6 @@ namespace NzKvoDaQm.Tests.Services
     using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Models.ViewModels;
     using NzKvoDaQm.Services;
-
 
     [TestClass]
     public class SearchServiceTests
@@ -132,8 +128,8 @@ namespace NzKvoDaQm.Tests.Services
                                                     "badjak.com"
                                                 },
                                    Products = this.Ingredients.Take(2).ToArray(),
-                                   Steps = Steps,
-                                   Author = Author,
+                                   Steps = this.Steps,
+                                   Author = this.Author,
                                    MinutesRequiredToCook = 30
                                },
                                new Recipe()
@@ -207,8 +203,8 @@ namespace NzKvoDaQm.Tests.Services
         [TestInitialize]
         public void Initialize()
         {
-            InitializeModels();
-            InitializeContext();
+            this.InitializeModels();
+            this.InitializeContext();
         }
 
         [TestMethod]
@@ -219,7 +215,7 @@ namespace NzKvoDaQm.Tests.Services
         [TestMethod]
         public void ReturningEmptyArrayOnEmptyQueryString()
         {
-            var service = new SearchService(this.Context);
+            var service = new NzKvoDaQm.Services.SearchService(this.Context);
 
             var recipes = service.GetRecipes(null);
 
