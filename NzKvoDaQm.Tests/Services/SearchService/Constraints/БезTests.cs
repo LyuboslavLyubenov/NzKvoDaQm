@@ -73,11 +73,5 @@
                          };
             Assert.IsFalse(constraint.IsAllowed(recipe));
         }
-
-        [TestMethod]
-        public void BlockingSpecificWordsFromRecipeTitle3()
-        {
-            
-        }
     }
 }
