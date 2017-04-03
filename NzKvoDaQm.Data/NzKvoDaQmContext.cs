@@ -5,6 +5,7 @@ namespace NzKvoDaQm.Data
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
+    using NzKvoDaQm.Data.Migrations;
     using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Models.ViewModels;
 
@@ -13,6 +14,7 @@ namespace NzKvoDaQm.Data
         public NzKvoDaQmContext()
             : base("name=NzKvoDaQmContext")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<NzKvoDaQmContext, Configuration>());
         }
 
         public static NzKvoDaQmContext Create()

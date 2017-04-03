@@ -11,7 +11,7 @@
         }
 
         [Required]
-        public ProductType ProductType
+        public virtual ProductType ProductType
         {
             get; set;
         }

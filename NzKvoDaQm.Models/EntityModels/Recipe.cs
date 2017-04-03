@@ -22,7 +22,7 @@
         }
 
         [Required]
-        public IList<RecipeImage> Images
+        public virtual IList<RecipeImage> Images
         {
             get; set;
         }
@@ -51,7 +51,7 @@
         }
 
         [Required]
-        public IList<Ingredient> Ingredients
+        public virtual IList<Ingredient> Ingredients
         {
             get; set;
         }
