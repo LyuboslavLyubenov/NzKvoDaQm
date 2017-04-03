@@ -24,7 +24,7 @@
             get; set;
         }
 
-        public virtual IList<Ingredient> ProductsInFridge
+        public virtual IList<Ingredient> IngredientsInFridge
         {
             get; set;
         }
@@ -33,6 +33,7 @@
         {
             this.Recipes = new List<Recipe>();
             this.Reviews = new List<Review>();
+            this.IngredientsInFridge = new List<Ingredient>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

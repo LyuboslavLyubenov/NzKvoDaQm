@@ -73,10 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ValidateStepsForRecipeAttribute.cs" />
+    <Compile Include="Attributes\ValidateUrl.cs" />
     <Compile Include="EntityModels\Comment.cs" />
     <Compile Include="EntityModels\IContainComments.cs" />
     <Compile Include="EntityModels\Product.cs" />
     <Compile Include="EntityModels\ProductType.cs" />
+    <Compile Include="EntityModels\RecipeImage.cs" />
     <Compile Include="EntityModels\RecipeStep.cs" />
     <Compile Include="EntityModels\Review.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />

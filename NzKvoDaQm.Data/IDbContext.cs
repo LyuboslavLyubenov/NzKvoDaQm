@@ -20,7 +20,7 @@
             get; set;
         }
 
-        IDbSet<Ingredient> Products
+        IDbSet<Ingredient> Ingredients
         {
             get; set;
         }
@@ -34,7 +34,12 @@
         {
             get; set;
         }
-        
+
+        IDbSet<RecipeImage> RecipeImages
+        {
+            get; set;
+        }
+
         IDbSet<Review> Reviews
         {
             get; set;

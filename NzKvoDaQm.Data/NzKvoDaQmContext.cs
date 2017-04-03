@@ -1,6 +1,7 @@
 namespace NzKvoDaQm.Data
 {
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -29,7 +30,7 @@ namespace NzKvoDaQm.Data
             get; set;
         }
 
-        public virtual IDbSet<Ingredient> Products
+        public virtual IDbSet<Ingredient> Ingredients
         {
             get; set;
         }
@@ -43,7 +44,12 @@ namespace NzKvoDaQm.Data
         {
             get; set;
         }
-        
+
+        public virtual IDbSet<RecipeImage> RecipeImages
+        {
+            get; set;
+        }
+
         public virtual IDbSet<Review> Reviews
         {
             get; set;

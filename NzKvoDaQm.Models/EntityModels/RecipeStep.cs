@@ -11,6 +11,6 @@
         [MinLength(4)]
         public string Text { get; set; }
         
-        public int TimeToFinishInMinutes { get; set; }
+        public int? TimeToFinishInMinutes { get; set; }
     }
 }

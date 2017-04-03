@@ -17,8 +17,10 @@ namespace NzKvoDaQm.Models.EntityModels
         [MinLength(4)]
         public string Body { get; set; }
         
+        [Required]
         public RatingType Rating { get; set; }
 
+        [Required]
         [InverseProperty("Reviews")]
         public virtual ApplicationUser Author { get; set; }
         

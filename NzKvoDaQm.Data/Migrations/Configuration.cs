@@ -122,7 +122,7 @@ namespace NzKvoDaQm.Data.Migrations
                                    {
                                        Name = "Доматен сок",
                                        ThumbnailUrl = "http://images.bigoven.com/image/upload/t_recipe-256/roasted-balsamic-tomato-sauce-cce951.jpg"
-                                   }, 
+                                   },
                                };
             context.ProductTypes.AddOrUpdate(productTypes);
             context.SaveChanges();
@@ -132,6 +132,7 @@ namespace NzKvoDaQm.Data.Migrations
         {
             var spaghetti = new Ingredient()
             {
+                Id = 1,
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Спагети".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 500
@@ -139,6 +140,7 @@ namespace NzKvoDaQm.Data.Migrations
 
             var onions = new Ingredient()
             {
+                Id = 2,
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Лук".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 100
@@ -146,24 +148,28 @@ namespace NzKvoDaQm.Data.Migrations
 
             var garlic = new Ingredient()
             {
+                Id = 3,
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Чесън".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 20
             };
             var tomato = new Ingredient()
             {
+                Id = 4,
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Домат".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 500
             };
             var tomatoSauce = new Ingredient()
             {
+                Id = 5,
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Доматен сок".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Milliliter,
                 Quantity = 300
             };
             var water = new Ingredient()
             {
+                Id = 6,
                 ProductType = context.ProductTypes.First(p => p.Name.ToUpper() == "Вода".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Liter,
                 Quantity = 2
@@ -182,33 +188,39 @@ namespace NzKvoDaQm.Data.Migrations
                         {
                             new RecipeStep()
                             {
+                                Id = 1,
                                 Text = "Свари спагетите. След като се сварят ги изцедете и им сложете малко олио",
                                 TimeToFinishInMinutes = 15
                             },
                             new RecipeStep()
                             {
+                                Id = 2,
                                 Text =
                                     "Обелете лука, измийте и обелете моркова и нарежете всичко на ситно. Сложете всичко да се запържва в тиган.",
                                 TimeToFinishInMinutes = 5
                             },
                             new RecipeStep()
                             {
+                                Id = 3,
                                 Text =
                                     "Сложете във 200 мл. вода доматеното пюре и нарязаните домати, разбъркайте ги добре и сложете сместа към задушените зеленчуци.",
                             },
                             new RecipeStep()
                             {
+                                Id = 4,
                                 Text = "Оставете соса да къкри на тих огън",
                                 TimeToFinishInMinutes = 20
                             },
                             new RecipeStep()
                             {
+                                Id = 5,
                                 Text = "Добавете сол, черен пипер и малко захар на вкус."
                             }
                         };
 
             var review = new Review()
             {
+                Id = 1,
                 Title = "Вкусничкоооо",
                 Body = "Все пак си е моята рецепта ;))))))))))))))",
                 Rating = RatingType.InLove,
@@ -217,14 +229,23 @@ namespace NzKvoDaQm.Data.Migrations
 
             var recipe = new Recipe()
             {
+                Id = 1,
                 Title = "Спагети с доматен сос",
-                ImagesUrls =
+                Images =
                     new[]
                         {
-                            "http://recepti.gotvach.bg/files/lib/600x350/spageti31.jpg",
-                            "http://gotvach.bg/files/recipes/photos/p_20160204_085608_12009.jpg"
+                            new RecipeImage()
+                            {
+                                Id = 1,
+                                Url = "http://recepti.gotvach.bg/files/lib/600x350/spageti31.jpg"
+                            },
+                            new RecipeImage()
+                            {
+                                Id = 2,
+                                Url = "http://gotvach.bg/files/recipes/photos/p_20160204_085608_12009.jpg"
+                            },
                         },
-                Products = products,
+                Ingredients = products,
                 Steps = steps,
                 Reviews =
                     new List<Review>()
@@ -235,15 +256,37 @@ namespace NzKvoDaQm.Data.Migrations
                 MinutesRequiredToCook = 50
             };
 
-            context.Products.AddOrUpdate(products);
+            context.Ingredients.AddOrUpdate(products);
             context.RecipeSteps.AddOrUpdate(steps);
             context.Reviews.AddOrUpdate(review);
+            context.RecipeImages.AddOrUpdate(recipe.Images.ToArray());
             context.Recipes.AddOrUpdate(recipe);
             context.SaveChanges();
         }
-        
+
         protected override void Seed(NzKvoDaQmContext context)
         {
+            var author1 = new ApplicationUser()
+            {
+                Id = "12ee11f3-2dfc-4bf4-84fb-97c080c68c6c",
+                Email = "testbrat1@email.com",
+                EmailConfirmed = true,
+                PasswordHash = "asdasdasdasdasda",
+                UserName = "Test1Userame"
+            };
+            var author2 = new ApplicationUser()
+            {
+                Id = "d462ac0f-bb4d-4f2a-9fb4-745ffeefda6b",
+                Email = "testbrat2@abv.bg",
+                EmailConfirmed = true,
+                PasswordHash = "sadaskdladlaskdalsdakdal",
+                UserName = "Test2Username",
+            };
+
+            context.Users.AddOrUpdate(author1);
+            context.Users.AddOrUpdate(author2);
+            context.SaveChanges();
+
             this.AddProductTypesToDatabase(context);
             this.AddRecipeForSpaghettiWithTomatoSauceToDatabase(context);
         }

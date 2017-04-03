@@ -20,8 +20,9 @@
         {
             get; set;
         }
-        
-        public string[] ImagesUrls
+
+        [Required]
+        public IList<RecipeImage> Images
         {
             get; set;
         }
@@ -50,7 +51,18 @@
         }
 
         [Required]
-        public IList<Ingredient> Products { get; set; }
+        public IList<Ingredient> Ingredients
+        {
+            get; set;
+        }
+
+        public Recipe()
+        {
+            this.Steps = new List<RecipeStep>();
+            this.Reviews = new List<Review>();
+            this.Ingredients = new List<Ingredient>();
+            this.Images = new List<RecipeImage>();
+        }
     }
 
 }
