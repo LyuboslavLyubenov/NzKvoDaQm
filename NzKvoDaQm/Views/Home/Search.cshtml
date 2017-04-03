@@ -44,7 +44,7 @@
                         <div class="recipe-footer">
                             <div class="recipe-ingredients">
                                 Съставки:
-                                @foreach (var ingredient in recipe.Ingredients.Select(ingredient => ingredient.ProductType).Take(3))
+                                @foreach (var ingredient in recipe.Ingredients.Select(ingredient => ingredient.IngredientType).Take(3))
                                 {
                                     <img src="@ingredient.ThumbnailUrl" class="recipe-ingredient" />
                                 }

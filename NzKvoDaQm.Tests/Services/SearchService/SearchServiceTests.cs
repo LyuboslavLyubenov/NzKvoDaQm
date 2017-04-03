@@ -16,7 +16,7 @@
     [TestClass]
     public class SearchServiceTests
     {
-        public ProductType[] ProductTypes
+        public IngredientType[] IngredientTypes
         {
             get; set;
         }
@@ -53,19 +53,19 @@
 
         private void InitializeModels()
         {
-            this.ProductTypes = new ProductType[]
+            this.IngredientTypes = new IngredientType[]
                                 {
-                                    new ProductType()
+                                    new IngredientType()
                                     {
                                         Name = "Spaghetti",
                                         ThumbnailUrl = "www.PTXURL.com"
                                     },
-                                    new ProductType()
+                                    new IngredientType()
                                     {
                                         Name = "Tomato sauce",
                                         ThumbnailUrl = "Nz.com"
                                     },
-                                    new ProductType()
+                                    new IngredientType()
                                     {
                                         Name = "Pastry",
                                         ThumbnailUrl = "pastry.com/img.jpg"
@@ -75,19 +75,19 @@
                            {
                                new Ingredient()
                                {
-                                   ProductType = this.ProductTypes[0],
+                                   IngredientType = this.IngredientTypes[0],
                                    QuantityMeasurementType = QuantityMeasurementType.Gram,
                                    Quantity = 200
                                },
                                new Ingredient()
                                {
-                                   ProductType = this.ProductTypes[1],
+                                   IngredientType = this.IngredientTypes[1],
                                    QuantityMeasurementType = QuantityMeasurementType.Milliliter,
                                    Quantity = 500
                                },
                                new Ingredient()
                                {
-                                   ProductType = this.ProductTypes[2],
+                                   IngredientType = this.IngredientTypes[2],
                                    QuantityMeasurementType = QuantityMeasurementType.Gram,
                                    Quantity = 500
                                }
@@ -187,7 +187,7 @@
 
         private void InitializeContext()
         {
-            var productTypesSet = new Mock<DbSet<ProductType>>().SetupData(this.ProductTypes);
+            var productTypesSet = new Mock<DbSet<IngredientType>>().SetupData(this.IngredientTypes);
             var productsSet = new Mock<DbSet<Ingredient>>().SetupData(this.Ingredients);
             var recipeStepsSet = new Mock<DbSet<RecipeStep>>().SetupData(this.Steps);
             var usersSet = new Mock<DbSet<ApplicationUser>>().SetupData(

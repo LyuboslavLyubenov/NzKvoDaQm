@@ -117,6 +117,7 @@
     <Compile Include="Services\SearchService\Constraints\ОтTests.cs" />
     <Compile Include="Services\SearchService\Constraints\БезTests.cs" />
     <Compile Include="Services\SearchService\Constraints\ЗаTests.cs" />
+    <Compile Include="Services\SearchService\Constraints\СъсTests.cs" />
     <Compile Include="Services\SearchService\SearchServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
