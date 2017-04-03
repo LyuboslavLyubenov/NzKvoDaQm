@@ -122,12 +122,18 @@
                                new Recipe()
                                {
                                    Title = "Spaghetti with tomato sauce",
-                                   ImagesUrls = new string[]
+                                   Images = new []
                                                 {
-                                                    "abvgd",
-                                                    "badjak.com"
+                                                    new RecipeImage()
+                                                    {
+                                                        Url = "abvgd"
+                                                    },
+                                                    new RecipeImage()
+                                                    {
+                                                        Url = "dasdad"
+                                                    }
                                                 },
-                                   Products = this.Ingredients.Take(2).ToArray(),
+                                   Ingredients = this.Ingredients.Take(2).ToArray(),
                                    Steps = this.Steps,
                                    Author = this.Author,
                                    MinutesRequiredToCook = 30
@@ -135,12 +141,14 @@
                                new Recipe()
                                {
                                    Title = "Spaghetti bolonese",
-                                   ImagesUrls = new string[]
+                                   Images = new []
                                                 {
-                                                    "asdasdad",
-                                                    "adasdad.asdad"
+                                                    new RecipeImage()
+                                                    {
+                                                        Url = "asdsadasda"
+                                                    },
                                                 },
-                                   Products = this.Ingredients.Take(1).ToArray(),
+                                   Ingredients = this.Ingredients.Take(1).ToArray(),
                                    Steps = this.Steps,
                                    Author = this.Author,
                                    MinutesRequiredToCook = 50
@@ -148,11 +156,14 @@
                                new Recipe()
                                {
                                    Title = "Spaghetti test2",
-                                   ImagesUrls = new string[]
+                                   Images = new []
                                                 {
-                                                    "asdasdassd"
+                                                    new RecipeImage()
+                                                    {
+                                                        Url = "asdsadasda"
+                                                    },
                                                 },
-                                   Products = this.Ingredients.ToArray(),
+                                   Ingredients = this.Ingredients.ToArray(),
                                    Steps = this.Steps,
                                    Author = this.Author2,
                                    MinutesRequiredToCook = 120
@@ -160,12 +171,14 @@
                                new Recipe()
                                {
                                    Title = "Баница със сиреньееее",
-                                   ImagesUrls = new string[]
+                                   Images = new []
                                                 {
-                                                    "asdsadasd",
-                                                    "asdadas"
+                                                    new RecipeImage()
+                                                    {
+                                                        Url = "asdsadasda"
+                                                    },
                                                 },
-                                   Products = this.Ingredients.Skip(2).Take(1).ToArray(),
+                                   Ingredients = this.Ingredients.Skip(2).Take(1).ToArray(),
                                    Steps = this.Steps,
                                    Author = this.Author2
                                },
@@ -188,7 +201,7 @@
 
             context.Setup(c => c.ProductTypes)
                 .Returns(productTypesSet.Object);
-            context.Setup(c => c.Products)
+            context.Setup(c => c.Ingredients)
                 .Returns(productsSet.Object);
             context.Setup(c => c.RecipeSteps)
                 .Returns(recipeStepsSet.Object);

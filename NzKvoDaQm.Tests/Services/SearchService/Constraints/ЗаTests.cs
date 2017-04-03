@@ -194,5 +194,19 @@
 
             Assert.IsFalse(constraint.IsAllowed(recipe));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InvalidTimeFormat()
+        {
+            new За("1 ЧАСА 20 минути 20 мин 20 часа");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InvalidTimeFormat2()
+        {
+            new За("минути часа");
+        }
     }
 }
