@@ -262,6 +262,10 @@
       <Project>{9d986d80-8338-4e6b-a1ed-744ea23b5539}</Project>
       <Name>NzKvoDaQm.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NzKvoDaQm.Services\NzKvoDaQm.Services.csproj">
+      <Project>{3CC4821C-41F0-4C5F-93E5-04BBAEE56547}</Project>
+      <Name>NzKvoDaQm.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

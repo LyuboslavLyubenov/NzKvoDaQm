@@ -11,11 +11,12 @@ namespace NzKvoDaQm
 
             routes.MapRoute(
                 "Search",
-                "search",
+                "home/search/{query}",
                 new
                 {
                     controller = "Home",
-                    action = "Search"
+                    action = "Search",
+                    query = UrlParameter.Optional
                 });
 
             routes.MapRoute(

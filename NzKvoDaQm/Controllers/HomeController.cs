@@ -66,7 +66,7 @@
                                 Recipes = recipes
                             };
 
-            return this.View();
+            return this.View(viewModel);
         }
     }
 }
