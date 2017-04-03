@@ -4,8 +4,9 @@
 
     using NzKvoDaQm.Data;
     using NzKvoDaQm.Models.EntityModels;
+    using NzKvoDaQm.Services.Interfaces;
 
-    public class SearchService : Service
+    public class SearchService : Service, ISearchService
     {
         public SearchService() : base()
         {
@@ -26,5 +27,4 @@
             return searchQuery.GetResults();
         }
     }
-
 }
