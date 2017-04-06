@@ -37,14 +37,8 @@
         {
             
         }
-
-        public ActionResult Index()
-        {
-            return View();
-        }
         
-        [Route("Search")]
-        public ActionResult Search(string query)
+        public ActionResult Index(string query)
         {
             Recipe[] recipes;
 

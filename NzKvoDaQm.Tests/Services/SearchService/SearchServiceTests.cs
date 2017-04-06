@@ -1,6 +1,5 @@
 ﻿namespace NzKvoDaQm.Tests.Services.SearchService
 {
-
     using System.Data.Entity;
     using System.Linq;
 
@@ -226,152 +225,73 @@
         }
 
         [TestMethod]
-        public void ReturningEmptyArrayOnEmptyQueryString()
+        public void ReturnAllRecipesOnEmptyQueryString()
         {
             var service = new NzKvoDaQm.Services.SearchService(this.Context);
 
             var recipes = service.GetRecipes(null);
 
-            Assert.AreEqual(0, recipes.Count);
+            Assert.AreEqual(this.Context.Recipes.Count(), recipes.Count());
         }
 
         [TestMethod]
-        public void ReturningEmptyArrayOnEmptyQueryString2()
+        public void ReturnAllRecipesOnEmptyQueryString2()
         {
             var service = new SearchService(this.Context);
 
             var recipes = service.GetRecipes("                 ");
 
-            Assert.AreEqual(0, recipes.Count);
+            Assert.AreEqual(this.Context.Recipes.Count(), recipes.Count());
         }
 
         [TestMethod]
-        public void ReturningEmptyArrayWhenNoMatches()
+        public void ReturnEmptyArrayWhenNoMatches()
         {
             var service = new SearchService(this.Context);
 
             var recipes = service.GetRecipes("addsadasdasdadsdaddsddsadsd");
 
-            Assert.AreEqual(0, recipes.Count);
+            Assert.AreEqual(0, recipes.Count());
         }
 
         [TestMethod]
-        public void ReturningRecipeWhenMatched1()
+        public void ReturnRecipeWhenMatched1()
         {
             var service = new SearchService(this.Context);
 
             var recipes = service.GetRecipes("Spaghetti");
 
-            Assert.AreEqual(this.Recipes[0], recipes[0]);
+            Assert.AreEqual(this.Recipes[0], recipes.First());
         }
 
         [TestMethod]
-        public void ReturningRecipeWhenMatched2()
+        public void ReturnRecipeWhenMatched2()
         {
             var service = new SearchService(this.Context);
 
             var recipes = service.GetRecipes("Spaghetti filipino maika ti e gotina jena ;))))");
 
-            Assert.AreEqual(this.Recipes[0], recipes[0]);
+            Assert.AreEqual(this.Recipes[0], recipes.First());
         }
 
         [TestMethod]
-        public void ExcludeRecipesContainingForbiddenWordInTitle()
+        public void ReturnAllRecipesWhenQueryContainsOnlySpecificKeyword()
         {
-            var service = new SearchService(this.Context);
+            var service = new NzKvoDaQm.Services.SearchService(this.Context);
 
-            var recipes = service.GetRecipes("Spaghetti без:\"tomato\"");
+            var recipes = service.GetRecipes("всички");
 
-            Assert.IsFalse(recipes.Contains(this.Recipes[0]));
+            Assert.AreEqual(this.Context.Recipes.Count(), recipes.Count());
         }
 
         [TestMethod]
-        public void ExcludeRecipesContainingForbiddenWordInTitle2()
+        public void ReturnAllRecipesWhenQueryContainsOnlySpecificKeyword1()
         {
-            var service = new SearchService(this.Context);
-
-            var recipes = service.GetRecipes("Spaghetti без:\"picccc\"");
-            var recipesContainingSpaghettiInTitle = service.GetRecipes("Spaghetti");
-
-            var isCorrectResult = !recipes.Except(recipesContainingSpaghettiInTitle)
-                                       .Any();
-
-            Assert.IsTrue(isCorrectResult);
-        }
-
-        [TestMethod]
-        public void ExcludeRecipesContainingForbiddenWordInTitle3()
-        {
-            var service = new SearchService(this.Context);
-
-            var recipes = service.GetRecipes("Spaghetti иван:spaghetti spaghetti:asd без:\" \"");
-            var recipesContainingSpaghettiInTitle = service.GetRecipes("Spaghetti");
-
-            var isCorrectResult = !recipes.Except(recipesContainingSpaghettiInTitle)
-                                       .Any();
-
-            Assert.IsTrue(isCorrectResult);
-        }
-
-        [TestMethod]
-        public void ExcludeRecipesContainingForbiddenWordInTitle4()
-        {
-            var service = new SearchService(this.Context);
-
-            var recipes = service.GetRecipes("Spaghetti без:\"tomato, test2\"");
-            
-            Assert.IsFalse(recipes.Contains(this.Recipes[0]));
-            Assert.IsFalse(recipes.Contains(this.Recipes[2]));
-        }
-        
-        [TestMethod]
-        public void DontExcludeAnyRecipeWhenForbiddenWordInTitleParameterIsEmptyOrWhiteSpace()
-        {
-            var service = new SearchService(this.Context);
-
-            var recipes = service.GetRecipes("Spaghetti без:\"\"");
-            var recipesContainingSpaghettiInTitle = service.GetRecipes("Spaghetti");
-
-            var isCorrectResult = !recipes.Except(recipesContainingSpaghettiInTitle)
-                                       .Any();
-
-            Assert.IsTrue(isCorrectResult);
-        }
-
-        [TestMethod]
-        public void DontExcludeAnyRecipeWhenForbiddenWordInTitleParameterIsEmptyOrWhiteSpace2()
-        {
-            var service = new SearchService(this.Context);
-
-            var recipes = service.GetRecipes("Spaghetti без:\"                          \"");
-            var recipesContainingSpaghettiInTitle = service.GetRecipes("Spaghetti");
-
-            var isCorrectResult = !recipes.Except(recipesContainingSpaghettiInTitle)
-                                       .Any();
-
-            Assert.IsTrue(isCorrectResult);
-        }
-
-        [TestMethod]
-        public void ReturnAll()
-        {
-            var service = new SearchService(this.Context);
+            var service = new NzKvoDaQm.Services.SearchService(this.Context);
 
             var recipes = service.GetRecipes("Всички");
 
-            var isReturnedAll = !recipes.Except(this.Recipes)
-                                     .Any();
-            Assert.IsTrue(isReturnedAll);
-        }
-
-        [TestMethod]
-        public void ReturnUnderSpecificTimeNeededToCook()
-        {
-            var service = new SearchService(this.Context);
-
-            var recipes = service.GetRecipes("Всички под:\"50 мин\"");
-
-
+            Assert.AreEqual(this.Context.Recipes.Count(), recipes.Count());
         }
     }
 }
