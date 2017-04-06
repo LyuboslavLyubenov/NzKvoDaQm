@@ -1,11 +1,12 @@
 ﻿namespace NzKvoDaQm.Services.Interfaces
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using NzKvoDaQm.Models.EntityModels;
 
     public interface ISearchService
     {
-        IList<Recipe> GetRecipes(string query);
+        IQueryable<Recipe> GetRecipes(string query);
     }
 }

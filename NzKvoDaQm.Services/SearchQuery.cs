@@ -70,20 +70,27 @@
                     continue;
                 }
 
-                var instance = (ISearchConstraint)Activator.CreateInstance(type, constraintValue);
-                constraints.Add(instance);
+                try
+                {
+                    var instance = (ISearchConstraint)Activator.CreateInstance(type, constraintValue);
+                    constraints.Add(instance);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
             }
 
             return constraints.ToArray();
         }
 
-        public Recipe[] GetResults()
+        public IQueryable<Recipe> GetResults()
         {
             var recipesContainingSelectedWords =
                 this.context.Recipes.Where(r => this.wordsToSearchFor.Any(w => r.Title.ToUpper().Contains(w)))
                     .ToList()
                     .Where(r => this.searchConstraints.All(s => s.IsAllowed(r)))
-                    .ToArray();
+                    .AsQueryable();
 
             return recipesContainingSelectedWords;
         }

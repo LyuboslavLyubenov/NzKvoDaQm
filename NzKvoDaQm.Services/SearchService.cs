@@ -1,6 +1,8 @@
 ﻿namespace NzKvoDaQm.Services
 {
     using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
 
     using NzKvoDaQm.Data;
     using NzKvoDaQm.Models.EntityModels;
@@ -16,11 +18,11 @@
         {
         }
         
-        public IList<Recipe> GetRecipes(string query)
+        public IQueryable<Recipe> GetRecipes(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
             {
-                return new Recipe[0];
+                return this.Context.Recipes;
             }
             
             var searchQuery = new SearchQuery(this.Context, query);

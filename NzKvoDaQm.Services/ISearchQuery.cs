@@ -1,11 +1,13 @@
 namespace NzKvoDaQm.Services
 {
 
+    using System.Linq;
+
     using NzKvoDaQm.Models.EntityModels;
 
     public interface ISearchQuery
     {
-        Recipe[] GetResults();
+        IQueryable<Recipe> GetResults();
     }
 
 }

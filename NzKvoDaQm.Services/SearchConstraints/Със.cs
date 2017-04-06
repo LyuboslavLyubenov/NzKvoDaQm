@@ -1,6 +1,5 @@
 ﻿namespace NzKvoDaQm.Services.SearchConstraints
 {
-
     using System;
     using System.Linq;
 
