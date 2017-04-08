@@ -7,6 +7,13 @@ using NzKvoDaQm.Models.EntityModels;
 
 namespace NzKvoDaQm.Controllers
 {
+
+    using System.Drawing;
+    using System.Text.RegularExpressions;
+
+    using NzKvoDaQm.Extensions;
+    using NzKvoDaQm.Models.ViewModels;
+
     public class RecipesController : Controller
     {
         private NzKvoDaQmContext db = new NzKvoDaQmContext();
@@ -37,22 +44,31 @@ namespace NzKvoDaQm.Controllers
         {
             return View();
         }
-
-        // POST: Recipes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,MinutesRequiredToCook")] Recipe recipe)
+        public JsonResult Create(CreateRecipeViewModel viewModel)
         {
-            if (ModelState.IsValid)
-            {
-                db.Recipes.Add(recipe);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            int minutesRequiredForCooking;
 
-            return View(recipe);
+            if (string.IsNullOrWhiteSpace(viewModel.Title) ||
+                viewModel.Images == null || 
+                viewModel.Ingredients == null ||
+                viewModel.Ingredients.Length == 0 ||
+                viewModel.Ingredients.All(i => Regex.IsMatch(i, "\\W|_")) ||
+                string.IsNullOrWhiteSpace(viewModel.MinutesRequiredForCooking) ||
+                !int.TryParse(viewModel.MinutesRequiredForCooking, out minutesRequiredForCooking) ||
+                viewModel.StepsTexts == null ||
+                viewModel.StepsTexts.Length == 0 ||
+                viewModel.StepsTexts.All(string.IsNullOrWhiteSpace))
+            {
+                return null;
+            }
+            
+
+
+            Image[] images;
+
+            return null;
         }
 
         // GET: Recipes/Edit/5
