@@ -11,7 +11,7 @@
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            @using (Html.BeginRouteForm("home/index", FormMethod.Get, new
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get, new
                                                                   {
                                                                       @id = "search-form"
                                                                   }))

@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    using NzKvoDaQm.Models.Attributes;
     using NzKvoDaQm.Models.ViewModels;
 
     public class Recipe
@@ -22,12 +23,14 @@
         }
 
         [Required]
+        [MinLengthCollection(1)]
         public virtual IList<RecipeImage> Images
         {
             get; set;
         }
 
         [Required]
+        [MinLengthCollection(1)]
         public virtual IList<RecipeStep> Steps
         {
             get; set;
@@ -51,6 +54,7 @@
         }
 
         [Required]
+        [MinLengthCollection(1)]
         public virtual IList<Ingredient> Ingredients
         {
             get; set;
@@ -64,5 +68,4 @@
             this.Images = new List<RecipeImage>();
         }
     }
-
 }
