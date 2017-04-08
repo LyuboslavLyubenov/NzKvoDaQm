@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Добави рецепта</h2>
+
+<div class="col-md-8 col-md-offset-2">
+    @using (Html.BeginForm("Create", "Recipes", FormMethod.Post, new { id = "create-recipe-form"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <input type="text" id="title" class="form-control" placeholder="Как ще се казва рецептата?"/>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label>Снимки</label>
+            <div id="add-photos">
+                Добави снимки
+                <input type="file" class="btn" value="Добави снимки" multiple="multiple"/>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label>Съставки</label>
+            <input type="text" id="ingredients" class="form-control" placeholder="лук, картофи, ..." value=""/>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label>Стъпки</label>
+            <ol id="steps-container"></ol>
+            <input type="button" id="add-step" class="btn btn-link" value="Добави стъпка"/>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label>Минути необходими за да се сготви</label>
+            <input type="text" id="minutesRequiredToCook" class="form-control" name="minutesRequiredToCook" placeholder="20 мин"/>
+        </div>
+        <a id="submit-button" href="#" class="btn btn-lg btn-success">Създай</a>
+    }
+</div>
+
+
+<script type="text/javascript">
+    
+    const stepTemplate =
+        '<li class="step">' +
+            '<textarea class="form-control step-name" placeholder="Какво трябва да се направи?"></textarea>' +
+            'Нужно време: <input type="text" class="form-control step-minutes"/> минути' +
+        '</li>';
+
+    $('#add-step').click(function () {
+        $('#steps-container').append(stepTemplate);
+    });
+
+    $('#submit-button').click(function() {
+        $.ajax({
+            type: "POST",
+            url: "/Recipes/Create",
+            contentType: false,
+            processData: false,
+            data: extractFormData(),
+            success: function() {
+                alert("Успешно качена рецепта!");
+                window.location.replace("/");
+            },
+            error: function() {
+                alert("Проблем при качването на рецептата!");
+            }
+        });
+    });
+
+    function extractFormData() {
+        let data = {};
+
+        data["Title"] = $('#title').text();
+        data["Images"] = $('#add-photos > input').get(0).files;
+        data["Ingrediets"] = $('#ingredients').text().split(',');
+
+        let stepsElements = $('.step');
+
+        data["StepsTexts"] = [];
+        data["StepsMinutes"] = [];
+
+        for (var i = 0; i < stepsElements.length; i++) {
+            let stepDescription = stepsElements[i].find('.step-name').text();
+            let stepMinutesRequired = stepsElements[i].find('.step-minutes').text();
+            data["StepsTexts"].push(stepDescription);
+            data["StepsMinutes"].push(stepMinutesRequired);
+        }
+
+        data["MinutesRequiredForCooking"] = $("minutesRequiredToCook").text();
+        return data;
+    }
+</script>
