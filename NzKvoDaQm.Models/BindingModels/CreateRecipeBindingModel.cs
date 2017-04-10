@@ -1,6 +1,5 @@
 ﻿namespace NzKvoDaQm.Models.BindingModels
 {
-
     using System.ComponentModel.DataAnnotations;
 
     using NzKvoDaQm.Models.Attributes;

@@ -80,7 +80,7 @@
     <Compile Include="EntityModels\Comment.cs" />
     <Compile Include="EntityModels\IContainComments.cs" />
     <Compile Include="EntityModels\Product.cs" />
-    <Compile Include="EntityModels\ProductType.cs" />
+    <Compile Include="EntityModels\IngredientType.cs" />
     <Compile Include="EntityModels\RecipeImage.cs" />
     <Compile Include="EntityModels\RecipeStep.cs" />
     <Compile Include="EntityModels\Review.cs" />

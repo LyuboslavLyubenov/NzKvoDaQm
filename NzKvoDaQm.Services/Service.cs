@@ -3,7 +3,7 @@
 
     using NzKvoDaQm.Data;
 
-    public class Service
+    public abstract class Service
     {
         protected IDbContext Context
         {
@@ -20,4 +20,5 @@
             this.Context = context;
         }
     }
+
 }
