@@ -1,14 +1,16 @@
 ﻿namespace NzKvoDaQm.Data
 {
 
+    using System;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Models.ViewModels;
 
-    public interface IDbContext
+    public interface IDbContext : IDisposable
     {
         IDbSet<RecipeStep> RecipeSteps
         {
@@ -54,6 +56,8 @@
         {
             get; set;
         }
+
+        DbEntityEntry Entry(object entry);
 
         int SaveChanges();
     }

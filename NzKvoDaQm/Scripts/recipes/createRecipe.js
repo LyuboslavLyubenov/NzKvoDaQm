@@ -46,7 +46,7 @@
                     deferred.resolve(data);
                 }
             }
-            reader.readAsBinaryString(images[j]);
+            reader.readAsDataURL(images[j]);
         }
 
         data["Ingredients"] = $('#ingredients').val().split(',');

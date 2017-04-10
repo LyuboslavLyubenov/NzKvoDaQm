@@ -86,13 +86,23 @@
 
         public IQueryable<Recipe> GetResults()
         {
-            var recipesContainingSelectedWords =
-                this.context.Recipes.Where(r => this.wordsToSearchFor.Any(w => r.Title.ToUpper().Contains(w)))
-                    .ToList()
-                    .Where(r => this.searchConstraints.All(s => s.IsAllowed(r)))
-                    .AsQueryable();
+            IQueryable<Recipe> recipesContainingSelectedWords;
 
-            return recipesContainingSelectedWords;
+            if (this.wordsToSearchFor.Length == 1 &&
+                this.wordsToSearchFor[0].ToUpper() == "всички".ToUpper())
+            {
+                recipesContainingSelectedWords = this.context.Recipes;
+            }
+            else
+            {
+                recipesContainingSelectedWords =
+                       this.context.Recipes.Where(
+                           r => this.wordsToSearchFor.Any(w => r.Title.ToUpper().Contains(w.ToUpper())));
+            }
+                    
+            var result = recipesContainingSelectedWords.Where(r => this.searchConstraints.All(s => s.IsAllowed(r)))
+                .AsQueryable();
+            return result;
         }
     }
 }
