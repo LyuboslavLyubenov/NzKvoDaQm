@@ -64,8 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ISearchService.cs" />
+    <Compile Include="IRecipesService.cs" />
     <Compile Include="ISearchQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecipeService.cs" />
     <Compile Include="SearchConstraints\ISearchConstraint.cs" />
     <Compile Include="SearchConstraints\Без.cs" />
     <Compile Include="SearchConstraints\За.cs" />
