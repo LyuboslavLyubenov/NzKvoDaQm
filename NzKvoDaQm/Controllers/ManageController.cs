@@ -10,6 +10,9 @@ using NzKvoDaQm.Models;
 
 namespace NzKvoDaQm.Controllers
 {
+
+    using NzKvoDaQm.Models.ViewModels;
+
     [Authorize]
     public class ManageController : Controller
     {

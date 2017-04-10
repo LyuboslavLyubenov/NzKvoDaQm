@@ -11,6 +11,7 @@ namespace NzKvoDaQm
 {
 
     using NzKvoDaQm.Data;
+    using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Models.ViewModels;
 
     public partial class Startup

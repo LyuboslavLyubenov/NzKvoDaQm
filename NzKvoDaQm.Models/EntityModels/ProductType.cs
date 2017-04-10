@@ -5,7 +5,7 @@
 
     public class IngredientType
     {
-        public int Id
+        public long Id
         {
             get; set;
         }

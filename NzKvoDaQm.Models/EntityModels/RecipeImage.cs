@@ -5,7 +5,7 @@
 
     public class RecipeImage
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [ValidateUrl]
         public string Url { get; set; }

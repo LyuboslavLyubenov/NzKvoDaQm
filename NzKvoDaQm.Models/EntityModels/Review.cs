@@ -8,7 +8,7 @@ namespace NzKvoDaQm.Models.EntityModels
 
     public class Review : IContainComments
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [MinLength(4)]

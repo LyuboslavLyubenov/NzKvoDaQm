@@ -5,7 +5,7 @@
 
     public class RecipeStep
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [MinLength(4)]

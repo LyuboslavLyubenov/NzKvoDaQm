@@ -10,7 +10,7 @@
 
     public class Recipe
     {
-        public int Id
+        public long Id
         {
             get; set;
         }

@@ -13,6 +13,7 @@ using NzKvoDaQm.Models;
 namespace NzKvoDaQm.Controllers
 {
 
+    using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Models.ViewModels;
 
     [Authorize]

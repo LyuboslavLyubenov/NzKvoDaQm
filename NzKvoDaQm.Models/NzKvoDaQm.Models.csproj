@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\MinLengthCollectionAttribute.cs" />
+    <Compile Include="Attributes\MinValueValidatorAttribute.cs" />
     <Compile Include="Attributes\ValidateStepsForRecipeAttribute.cs" />
     <Compile Include="Attributes\ValidateUrl.cs" />
     <Compile Include="EntityModels\Comment.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="EntityModels\IdentityModels.cs" />
     <Compile Include="EntityModels\Recipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CreateRecipeViewModel.cs" />
+    <Compile Include="BindingModels\CreateRecipeBindingModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>

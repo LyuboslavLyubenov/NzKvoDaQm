@@ -7,7 +7,7 @@
 
     public class Comment : IContainComments
     {
-        public int Id
+        public long Id
         {
             get; set;
         }
