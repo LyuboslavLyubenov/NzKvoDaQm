@@ -26,18 +26,19 @@
         <hr>
         <div class="form-group">
             <label>Съставки</label>
-            <input type="text" id="ingredients" class="form-control" placeholder="лук, картофи, ..." value="" />
+            <ol id="ingredients-container" class="ordered-list-container"></ol>
+            <input type="button" id="add-ingredients" class="btn btn-link" value="Добави съставка" />
         </div>
         <hr>
         <div class="form-group">
             <label>Стъпки</label>
-            <ol id="steps-container"></ol>
+            <ol id="steps-container" class="ordered-list-container"></ol>
             <input type="button" id="add-step" class="btn btn-link" value="Добави стъпка" />
         </div>
         <hr>
         <div class="form-group">
             <label>Минути необходими за да се сготви</label>
-            <input type="text" id="minutesRequiredToCook" class="form-control" name="minutesRequiredToCook" placeholder="20 мин" />
+            <input type="text" id="minutesRequiredToCook" class="form-control" name="minutesRequiredToCook" oninput="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="20 мин" />
         </div>
         <a id="submit-button" href="#" class="btn btn-lg btn-success">Създай</a>
     }

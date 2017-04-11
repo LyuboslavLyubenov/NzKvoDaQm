@@ -51,8 +51,6 @@
     height: 32px;
 }
 
-/* recipe */
-
 .recipe {
     display: inline-block;
     margin-left: 2.5%;
@@ -108,6 +106,10 @@
 
 /* Add recipe */
 
+.form-group > label {
+    padding-bottom: 10px;
+}
+
 #create-recipe-form {
     display: inline-block;
     width: 100%;
@@ -149,42 +151,62 @@
     top: 0;
 }
 
-#ingredients {
-    display: block;
-    width: 300px;
-    margin: 0 auto;
-}
-
-#steps-container {
+.ordered-list-container {
     margin-left: 0;
     padding-right: 0;
     list-style-type: none;
     list-style-position: outside;
 }
 
-.step {
+.ordered-list-item {
     display: block;
-    width: 100%;
     counter-increment: step-counter;
     clear: both;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
-.step::before {
+.ordered-list-item::before {
     display: inline-block;
     position: relative;
     height: 100%;
-    float: left;
+    margin-right: 30px;
     content: counter(step-counter);
     font-size: 20px;
     font-weight: bold;
 }
 
+.ingredient {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ingredient-name {
+    display: inline;
+    width: 200px;
+}
+
+.ingredient-quantity {
+    display: inline;
+    margin-left: 10px;
+    width: 100px;
+    margin-right: 10px;
+}
+
+.ingredient-measurement-type {
+    width: 150px;
+    display: inline;
+}
+
+.step {
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .step-name {
     display: inline-block;
-    width: 300px;
-    max-width: 300px;
+    width: 200px;
+    max-width: 250px;
     max-height: 150px;
     margin-right: 10px;
 }
@@ -199,8 +221,4 @@
     width: 100px;
     margin: 0 auto;
     margin-top: 5px;
-}
-
-.form-group > label {
-    padding-bottom: 10px;
 }
