@@ -124,7 +124,7 @@ namespace NzKvoDaQm.Data.Migrations
                                        ThumbnailUrl = "http://images.bigoven.com/image/upload/t_recipe-256/roasted-balsamic-tomato-sauce-cce951.jpg"
                                    },
                                };
-            context.ProductTypes.AddOrUpdate(productTypes);
+            context.IngredientTypes.AddOrUpdate(productTypes);
             context.SaveChanges();
         }
 
@@ -133,7 +133,7 @@ namespace NzKvoDaQm.Data.Migrations
             var spaghetti = new Ingredient()
             {
                 Id = 1,
-                IngredientType = context.ProductTypes.First(p => p.Name.ToUpper() == "Спагети".ToUpper()),
+                IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Спагети".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 500
             };
@@ -141,7 +141,7 @@ namespace NzKvoDaQm.Data.Migrations
             var onions = new Ingredient()
             {
                 Id = 2,
-                IngredientType = context.ProductTypes.First(p => p.Name.ToUpper() == "Лук".ToUpper()),
+                IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Лук".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 100
             };
@@ -149,28 +149,28 @@ namespace NzKvoDaQm.Data.Migrations
             var garlic = new Ingredient()
             {
                 Id = 3,
-                IngredientType = context.ProductTypes.First(p => p.Name.ToUpper() == "Чесън".ToUpper()),
+                IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Чесън".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 20
             };
             var tomato = new Ingredient()
             {
                 Id = 4,
-                IngredientType = context.ProductTypes.First(p => p.Name.ToUpper() == "Домат".ToUpper()),
+                IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Домат".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Gram,
                 Quantity = 500
             };
             var tomatoSauce = new Ingredient()
             {
                 Id = 5,
-                IngredientType = context.ProductTypes.First(p => p.Name.ToUpper() == "Доматен сок".ToUpper()),
+                IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Доматен сок".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Milliliter,
                 Quantity = 300
             };
             var water = new Ingredient()
             {
                 Id = 6,
-                IngredientType = context.ProductTypes.First(p => p.Name.ToUpper() == "Вода".ToUpper()),
+                IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Вода".ToUpper()),
                 QuantityMeasurementType = QuantityMeasurementType.Liter,
                 Quantity = 2
             };

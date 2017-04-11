@@ -1,8 +1,5 @@
 ﻿namespace NzKvoDaQm.Models.BindingModels
 {
-    using System.ComponentModel.DataAnnotations;
-
-    using NzKvoDaQm.Models.Attributes;
     using NzKvoDaQm.Models.EntityModels;
 
     public class CreateRecipeBindingModel

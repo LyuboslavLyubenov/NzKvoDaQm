@@ -37,7 +37,7 @@ namespace NzKvoDaQm.Data
             get; set;
         }
 
-        public virtual IDbSet<IngredientType> ProductTypes
+        public virtual IDbSet<IngredientType> IngredientTypes
         {
             get; set;
         }

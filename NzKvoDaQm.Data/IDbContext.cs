@@ -27,7 +27,7 @@
             get; set;
         }
 
-        IDbSet<IngredientType> ProductTypes
+        IDbSet<IngredientType> IngredientTypes
         {
             get; set;
         }

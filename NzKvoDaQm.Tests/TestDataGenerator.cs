@@ -216,7 +216,7 @@
 
             var context = new Mock<NzKvoDaQmContext>();
 
-            context.Setup(c => c.ProductTypes)
+            context.Setup(c => c.IngredientTypes)
                 .Returns(productTypesSet.Object);
             context.Setup(c => c.Ingredients)
                 .Returns(productsSet.Object);
