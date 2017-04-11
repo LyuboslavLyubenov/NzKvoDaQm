@@ -11,6 +11,7 @@
     using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Models.ViewModels;
     using NzKvoDaQm.Services;
+    using NzKvoDaQm.Services.Search;
 
     [TestClass]
     public class SearchServiceTests
@@ -32,7 +33,7 @@
         [TestMethod]
         public void ReturnAllRecipesOnEmptyQueryString()
         {
-            var service = new NzKvoDaQm.Services.SearchService(this.context);
+            var service = new SearchService(this.context);
 
             var recipes = service.GetRecipes(null);
 
@@ -81,7 +82,7 @@
         [TestMethod]
         public void ReturnAllRecipesWhenQueryContainsOnlySpecificKeyword()
         {
-            var service = new NzKvoDaQm.Services.SearchService(this.context);
+            var service = new SearchService(this.context);
 
             var recipes = service.GetRecipes("всички");
 
@@ -91,7 +92,7 @@
         [TestMethod]
         public void ReturnAllRecipesWhenQueryContainsOnlySpecificKeyword1()
         {
-            var service = new NzKvoDaQm.Services.SearchService(this.context);
+            var service = new SearchService(this.context);
 
             var recipes = service.GetRecipes("Всички");
 

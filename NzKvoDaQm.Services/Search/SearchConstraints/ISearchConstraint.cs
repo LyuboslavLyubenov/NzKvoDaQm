@@ -1,5 +1,6 @@
-﻿namespace NzKvoDaQm.Services.SearchConstraints
+﻿namespace NzKvoDaQm.Services.Search.SearchConstraints
 {
+
     using NzKvoDaQm.Models.EntityModels;
 
     public interface ISearchConstraint

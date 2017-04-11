@@ -5,11 +5,15 @@
     using System.Data.Entity;
     using System.Linq;
 
+    using NzKvoDaQm.Data;
     using NzKvoDaQm.Services.Interfaces;
 
     public abstract class EntityService<T> : IEntityService<T> where T : class
     {
-        private readonly IDbSet<T> set;
+        public event EventHandler OnSetModification = delegate
+            { }; 
+
+        protected readonly IDbSet<T> Set;
 
         protected EntityService(IDbSet<T> set)
         {
@@ -18,24 +22,24 @@
                 throw new ArgumentNullException(nameof(set));
             }
 
-            this.set = set;
+            this.Set = set;
         }
 
         public T Get(long id)
         {
-            return this.set.Find(id);
+            return this.Set.Find(id);
         }
 
         public IQueryable<T> Get(Func<T, bool> condition)
         {
-            return this.set.Where(condition).AsQueryable();
+            return this.Set.Where(condition).AsQueryable();
         }
 
         public bool Delete(T entity)
         {
             try
             {
-                this.set.Remove(entity);
+                this.Set.Remove(entity);
             }
             catch
             {
@@ -45,5 +49,4 @@
             return true;
         }
     }
-
 }

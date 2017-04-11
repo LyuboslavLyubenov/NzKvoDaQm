@@ -5,7 +5,7 @@ namespace NzKvoDaQm.Tests.Services.SearchService.Constraints
 {
 
     using NzKvoDaQm.Models.EntityModels;
-    using NzKvoDaQm.Services.SearchConstraints;
+    using NzKvoDaQm.Services.Search.SearchConstraints;
 
     [TestClass]
     public class СъсTests

@@ -10,6 +10,7 @@
     using NzKvoDaQm.Models.ViewModels;
     using NzKvoDaQm.Services;
     using NzKvoDaQm.Services.Interfaces;
+    using NzKvoDaQm.Services.Search;
 
     public class HomeController : Controller
     {

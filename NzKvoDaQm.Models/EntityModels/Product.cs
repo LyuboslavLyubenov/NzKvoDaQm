@@ -1,6 +1,5 @@
 ﻿namespace NzKvoDaQm.Models.EntityModels
 {
-
     using System.ComponentModel.DataAnnotations;
 
     public class Ingredient
@@ -31,9 +30,6 @@
         Tablespoon,
         Dessertspoon,
         Gram,
-        Kilogram,
-        Cup,
-        Pound
+        Kilogram
     }
-
 }

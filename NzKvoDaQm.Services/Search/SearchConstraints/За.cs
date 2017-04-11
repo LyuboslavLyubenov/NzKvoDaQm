@@ -1,5 +1,6 @@
-﻿namespace NzKvoDaQm.Services.SearchConstraints
+﻿namespace NzKvoDaQm.Services.Search.SearchConstraints
 {
+
     using System;
     using System.Linq;
 
@@ -19,7 +20,7 @@
         /// <param name="time">Максимум време за сготвяне. Формат: number минути/мин/часа/</param>
         public За(string time)
         {
-            this.InvalidTimeFormatExceptionMessage = $"Not supported time. Must be in format: {{number}} {string.Join(",", AllowedTimeTypes)}. Example: 15 минути";
+            this.InvalidTimeFormatExceptionMessage = $"Not supported time. Must be in format: {{number}} {string.Join(",", this.AllowedTimeTypes)}. Example: 15 минути";
 
             var timeParams = time.Split(
                 new char[]
@@ -34,7 +35,7 @@
 
             if (timeParams.Length != 2)
             {
-                throw new ArgumentException(InvalidTimeFormatExceptionMessage);
+                throw new ArgumentException(this.InvalidTimeFormatExceptionMessage);
             }
 
             int timeNumber;
@@ -42,14 +43,14 @@
 
             if (!isValidTimeNumber || timeNumber <= 0)
             {
-                throw new ArgumentException(InvalidTimeFormatExceptionMessage);
+                throw new ArgumentException(this.InvalidTimeFormatExceptionMessage);
             }
             
             var timeType = timeParams[1];
 
-            if (AllowedTimeTypes.Contains(timeType))
+            if (this.AllowedTimeTypes.Contains(timeType))
             {
-                throw new ArgumentException(InvalidTimeFormatExceptionMessage);
+                throw new ArgumentException(this.InvalidTimeFormatExceptionMessage);
             }
 
             this.timeNumber = timeNumber;

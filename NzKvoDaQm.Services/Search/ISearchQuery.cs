@@ -1,4 +1,4 @@
-namespace NzKvoDaQm.Services
+namespace NzKvoDaQm.Services.Search
 {
 
     using System.Linq;

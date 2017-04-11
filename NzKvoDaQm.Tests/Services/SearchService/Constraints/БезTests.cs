@@ -6,7 +6,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using NzKvoDaQm.Models.EntityModels;
-    using NzKvoDaQm.Services.SearchConstraints;
+    using NzKvoDaQm.Services.Search.SearchConstraints;
 
     [TestClass]
     public class БезTests

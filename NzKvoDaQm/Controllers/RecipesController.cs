@@ -1,22 +1,38 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-using NzKvoDaQm.Data;
-using NzKvoDaQm.Models.EntityModels;
-
-namespace NzKvoDaQm.Controllers
+﻿namespace NzKvoDaQm.Controllers
 {
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+    using NzKvoDaQm.Data;
+    using NzKvoDaQm.Models.EntityModels;
 
+    using System;
     using System.Drawing;
+    using System.IO;
+    using System.Text;
     using System.Text.RegularExpressions;
 
-    using NzKvoDaQm.Extensions;
+    using NzKvoDaQm.Models.BindingModels;
     using NzKvoDaQm.Models.ViewModels;
 
     public class RecipesController : Controller
     {
-        private NzKvoDaQmContext db = new NzKvoDaQmContext();
+        private readonly IDbContext db;
+
+        public RecipesController() : this(new NzKvoDaQmContext())
+        {
+        }
+
+        public RecipesController(IDbContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            this.db = context;
+        }
 
         // GET: Recipes
         public ActionResult Index()
@@ -46,28 +62,8 @@ namespace NzKvoDaQm.Controllers
         }
         
         [HttpPost]
-        public JsonResult Create(CreateRecipeViewModel viewModel)
+        public ActionResult Create(CreateRecipeBindingModel bindingModel)
         {
-            int minutesRequiredForCooking;
-
-            if (string.IsNullOrWhiteSpace(viewModel.Title) ||
-                viewModel.Images == null || 
-                viewModel.Ingredients == null ||
-                viewModel.Ingredients.Length == 0 ||
-                viewModel.Ingredients.All(i => Regex.IsMatch(i, "\\W|_")) ||
-                string.IsNullOrWhiteSpace(viewModel.MinutesRequiredForCooking) ||
-                !int.TryParse(viewModel.MinutesRequiredForCooking, out minutesRequiredForCooking) ||
-                viewModel.StepsTexts == null ||
-                viewModel.StepsTexts.Length == 0 ||
-                viewModel.StepsTexts.All(string.IsNullOrWhiteSpace))
-            {
-                return null;
-            }
-            
-
-
-            Image[] images;
-
             return null;
         }
 

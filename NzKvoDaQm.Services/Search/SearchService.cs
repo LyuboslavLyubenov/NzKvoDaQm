@@ -1,7 +1,6 @@
-﻿namespace NzKvoDaQm.Services
+﻿namespace NzKvoDaQm.Services.Search
 {
-    using System.Collections.Generic;
-    using System.Data.Entity;
+
     using System.Linq;
 
     using NzKvoDaQm.Data;

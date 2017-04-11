@@ -1,5 +1,6 @@
-﻿namespace NzKvoDaQm.Services
+﻿namespace NzKvoDaQm.Services.Search
 {
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -8,7 +9,7 @@
 
     using NzKvoDaQm.Data;
     using NzKvoDaQm.Models.EntityModels;
-    using NzKvoDaQm.Services.SearchConstraints;
+    using NzKvoDaQm.Services.Search.SearchConstraints;
 
     public class SearchQuery : ISearchQuery
     {

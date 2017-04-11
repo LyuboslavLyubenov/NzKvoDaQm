@@ -1,12 +1,10 @@
 ﻿namespace NzKvoDaQm.Models.EntityModels
 {
-
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using NzKvoDaQm.Models.Attributes;
-    using NzKvoDaQm.Models.ViewModels;
 
     public class Recipe
     {
