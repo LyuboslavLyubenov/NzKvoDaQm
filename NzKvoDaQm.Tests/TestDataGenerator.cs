@@ -1,6 +1,7 @@
 ﻿namespace NzKvoDaQm.Tests
 {
 
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
 
@@ -19,9 +20,9 @@
         {
         }
 
-        private IngredientType[] GenerateIngredientsTypes()
+        private IList<IngredientType> GenerateIngredientsTypes()
         {
-            return new IngredientType[]
+            return new List<IngredientType>()
                                 {
                                     new IngredientType()
                                     {
@@ -66,9 +67,9 @@
                                 };
         }
 
-        private Ingredient[] GenerateIngredientsUsedInRecipes(IngredientType[] ingredientTypes)
+        private IList<Ingredient> GenerateIngredientsUsedInRecipes(IList<IngredientType> ingredientTypes)
         {
-            return new Ingredient[]
+            return new List<Ingredient>()
                    {
                        new Ingredient()
                        {
@@ -91,9 +92,9 @@
                    };
         }
 
-        private RecipeStep[] GenerateRecipeSteps()
+        private IList<RecipeStep> GenerateRecipeSteps()
         {
-            return new RecipeStep[]
+            return new List<RecipeStep>()
                    {
                        new RecipeStep()
                        {
@@ -107,9 +108,9 @@
                    };
         }
 
-        private ApplicationUser[] GenerateAuthors()
+        private IList<ApplicationUser> GenerateAuthors()
         {
-            return new[]
+            return new List<ApplicationUser>()
                    {
                        new ApplicationUser()
                        {
@@ -126,9 +127,9 @@
                    };
         }
 
-        private Recipe[] GenerateRecipes(Ingredient[] ingredients, RecipeStep[] steps, ApplicationUser[] authors)
+        private IList<Recipe> GenerateRecipes(IList<Ingredient> ingredients, IList<RecipeStep> steps, IList<ApplicationUser> authors)
         {
-            return new Recipe[]
+            return new List<Recipe>()
                    {
                        new Recipe()
                        {
