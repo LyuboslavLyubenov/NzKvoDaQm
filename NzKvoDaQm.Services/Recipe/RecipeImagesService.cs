@@ -3,13 +3,14 @@
 
     using System.Data.Entity;
 
+    using NzKvoDaQm.Data;
     using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Services.Interfaces;
 
     public class RecipeImagesService : EntityService<RecipeImage>, IRecipeImagesService
     {
-        public RecipeImagesService(IDbSet<RecipeImage> set)
-            : base(set)
+        public RecipeImagesService(IDbSet<RecipeImage> set, IDbContext context)
+            : base(set, context)
         {
         }
 

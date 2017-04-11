@@ -4,13 +4,14 @@ namespace NzKvoDaQm.Services.Recipe
     using System;
     using System.Data.Entity;
 
+    using NzKvoDaQm.Data;
     using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Services.Interfaces;
 
     public class RecipeIngredientsService : EntityService<Ingredient>, IRecipeIngredientsService
     {
-        public RecipeIngredientsService(IDbSet<Ingredient> set)
-            : base(set)
+        public RecipeIngredientsService(IDbSet<Ingredient> set, IDbContext context)
+            : base(set, context)
         {
         }
 

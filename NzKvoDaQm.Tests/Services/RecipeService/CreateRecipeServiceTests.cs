@@ -39,15 +39,16 @@
             var dataGenerator = new TestDataGenerator();
             this.context = dataGenerator.GenerateContext();
 
-            var ingredientsService = new RecipeIngredientsService(this.context.Ingredients);
-            var recipeImagesService = new RecipeImagesService(this.context.RecipeImages);
-            var recipeStepService = new RecipeStepService(this.context.RecipeSteps);
+            var ingredientsService = new RecipeIngredientsService(this.context.Ingredients, this.context);
+            var recipeImagesService = new RecipeImagesService(this.context.RecipeImages, this.context);
+            var recipeStepService = new RecipeStepService(this.context.RecipeSteps, this.context);
             this.recipesService = 
                 new RecipeService(
                     this.context.Recipes, 
                     ingredientsService, 
                     recipeImagesService,
-                    recipeStepService);
+                    recipeStepService,
+                    this.context);
 
             this.author = this.context.Users.First();
         }

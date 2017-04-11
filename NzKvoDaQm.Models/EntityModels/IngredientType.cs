@@ -16,7 +16,6 @@
             get; set;
         }
         
-        [Required]
         public string ThumbnailUrl
         {
             get; set;

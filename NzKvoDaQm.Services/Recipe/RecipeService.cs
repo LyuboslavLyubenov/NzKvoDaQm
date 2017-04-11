@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    using NzKvoDaQm.Data;
     using NzKvoDaQm.Models.BindingModels;
     using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Services.Interfaces;
@@ -23,8 +24,9 @@
             IDbSet<Recipe> set, 
             IRecipeIngredientsService ingredientsService,
             IRecipeImagesService recipeImagesesService,
-            IRecipeStepService recipeStepsService)
-            : base(set)
+            IRecipeStepService recipeStepsService,
+            IDbContext context)
+            : base(set, context)
         {
             if (ingredientsService == null)
             {

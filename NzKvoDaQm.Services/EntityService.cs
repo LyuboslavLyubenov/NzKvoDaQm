@@ -10,12 +10,10 @@
 
     public abstract class EntityService<T> : IEntityService<T> where T : class
     {
-        public event EventHandler OnSetModification = delegate
-            { }; 
-
         protected readonly IDbSet<T> Set;
+        private Func<int> saveChangesAction;
 
-        protected EntityService(IDbSet<T> set)
+        protected EntityService(IDbSet<T> set, IDbContext context)
         {
             if (set == null)
             {
@@ -23,6 +21,7 @@
             }
 
             this.Set = set;
+            this.saveChangesAction = context.SaveChanges;
         }
 
         public T Get(long id)
@@ -47,6 +46,11 @@
             }
 
             return true;
+        }
+
+        protected int SaveChanges()
+        {
+            return this.saveChangesAction();
         }
     }
 }
