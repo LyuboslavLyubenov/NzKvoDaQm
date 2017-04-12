@@ -17,7 +17,26 @@ namespace NzKvoDaQm.Services.Recipe
 
         public Ingredient Create(IngredientType ingredientType, QuantityMeasurementType quantityMeasurementType, int quantity)
         {
-            throw new NotImplementedException();
+            if (ingredientType == null)
+            {
+                throw new ArgumentNullException(nameof(ingredientType));
+            }
+
+            if (quantity <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(quantity));
+            }
+            
+            var ingredient = new Ingredient()
+                            {
+                                IngredientType = ingredientType,
+                                QuantityMeasurementType = quantityMeasurementType,
+                                Quantity = quantity
+                            };
+            this.Set.Add(ingredient);
+            this.SaveChanges();
+
+            return ingredient;
         }
     }
 }
