@@ -11,7 +11,7 @@
     public abstract class EntityService<T> : IEntityService<T> where T : class
     {
         protected readonly IDbSet<T> Set;
-        private Func<int> saveChangesAction;
+        private readonly Func<int> saveChangesAction;
 
         protected EntityService(IDbSet<T> set, IDbContext context)
         {
@@ -24,17 +24,17 @@
             this.saveChangesAction = context.SaveChanges;
         }
 
-        public T Get(long id)
+        public virtual T Get(long id)
         {
             return this.Set.Find(id);
         }
 
-        public IQueryable<T> Get(Func<T, bool> condition)
+        public virtual IQueryable<T> Get(Func<T, bool> condition)
         {
             return this.Set.Where(condition).AsQueryable();
         }
 
-        public bool Delete(T entity)
+        public virtual bool Delete(T entity)
         {
             try
             {
