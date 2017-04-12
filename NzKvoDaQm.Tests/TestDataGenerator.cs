@@ -127,24 +127,33 @@
                    };
         }
 
-        private IList<Recipe> GenerateRecipes(IList<Ingredient> ingredients, IList<RecipeStep> steps, IList<ApplicationUser> authors)
+        private IList<RecipeImage> GenerateRecipeImages()
+        {
+            return new List<RecipeImage>()
+                   {
+                       new RecipeImage()
+                       {
+                           Url = "abvgd"
+                       },
+                       new RecipeImage()
+                       {
+                           Url = "dasdad"
+                       }
+                   };
+        }
+
+        private IList<Recipe> GenerateRecipes(
+            IList<Ingredient> ingredients, 
+            IList<RecipeStep> steps, 
+            IList<RecipeImage> images, 
+            IList<ApplicationUser> authors)
         {
             return new List<Recipe>()
                    {
                        new Recipe()
                        {
                            Title = "Spaghetti with tomato sauce",
-                           Images = new[]
-                                    {
-                                        new RecipeImage()
-                                        {
-                                            Url = "abvgd"
-                                        },
-                                        new RecipeImage()
-                                        {
-                                            Url = "dasdad"
-                                        }
-                                    },
+                           Images = images,
                            Ingredients = ingredients.Take(2)
                                .ToArray(),
                            Steps = steps,
@@ -154,13 +163,7 @@
                        new Recipe()
                        {
                            Title = "Spaghetti bolonese",
-                           Images = new[]
-                                    {
-                                        new RecipeImage()
-                                        {
-                                            Url = "asdsadasda"
-                                        },
-                                    },
+                           Images = images.Take(1).ToList(),
                            Ingredients = ingredients.Take(1)
                                .ToArray(),
                            Steps = steps,
@@ -170,13 +173,7 @@
                        new Recipe()
                        {
                            Title = "Spaghetti test2",
-                           Images = new[]
-                                    {
-                                        new RecipeImage()
-                                        {
-                                            Url = "asdsadasda"
-                                        },
-                                    },
+                           Images = images.Skip(1).Take(1).ToList(),
                            Ingredients = ingredients.ToArray(),
                            Steps = steps,
                            Author = authors[1],
@@ -185,13 +182,7 @@
                        new Recipe()
                        {
                            Title = "Баница със сиреньееее",
-                           Images = new[]
-                                    {
-                                        new RecipeImage()
-                                        {
-                                            Url = "asdsadasda"
-                                        },
-                                    },
+                           Images = images,
                            Ingredients = ingredients.Skip(2)
                                .Take(1)
                                .ToArray(),
@@ -206,11 +197,13 @@
             var ingredientTypes = this.GenerateIngredientsTypes();
             var ingredients = this.GenerateIngredientsUsedInRecipes(ingredientTypes);
             var steps = this.GenerateRecipeSteps();
+            var images = this.GenerateRecipeImages();
             var authors = this.GenerateAuthors();
-            var recipes = this.GenerateRecipes(ingredients, steps, authors);
+            var recipes = this.GenerateRecipes(ingredients, steps, images, authors);
 
             var productTypesSet = new Mock<DbSet<IngredientType>>().SetupData(ingredientTypes);
             var productsSet = new Mock<DbSet<Ingredient>>().SetupData(ingredients);
+            var imagesSet = new Mock<DbSet<RecipeImage>>().SetupData(images);
             var recipeStepsSet = new Mock<DbSet<RecipeStep>>().SetupData(steps);
             var usersSet = new Mock<DbSet<ApplicationUser>>().SetupData(authors);
             var recipesSet = new Mock<DbSet<Recipe>>().SetupData(recipes);
@@ -221,6 +214,8 @@
                 .Returns(productTypesSet.Object);
             context.Setup(c => c.Ingredients)
                 .Returns(productsSet.Object);
+            context.Setup(c => c.RecipeImages)
+                .Returns(imagesSet.Object);
             context.Setup(c => c.RecipeSteps)
                 .Returns(recipeStepsSet.Object);
             context.Setup(c => c.Users)
