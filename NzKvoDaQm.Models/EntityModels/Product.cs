@@ -39,6 +39,7 @@
             {
                 var ingredient = (Ingredient)obj;
                 return this.IngredientType == ingredient.IngredientType
+                       && this.QuantityMeasurementType == ingredient.QuantityMeasurementType
                        && this.Quantity == ingredient.Quantity;
             }
 
