@@ -1,7 +1,7 @@
 ﻿namespace NzKvoDaQm.Services.Recipe
 {
-
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Drawing.Imaging;
     using System.IO;
@@ -16,145 +16,197 @@
 
     public class RecipeService : EntityService<Recipe>, IRecipesService
     {
+        private readonly IIngredientTypesService ingredientTypesService;
+
         private readonly IRecipeIngredientsService ingredientsService;
-        private readonly IRecipeImagesService recipeImagesesService;
-        private readonly IRecipeStepsService recipeStepsesService;
+        private readonly IRecipeImagesService recipeImagesService;
+        private readonly IRecipeStepsService recipeStepsService;
 
         public RecipeService(
             IDbSet<Recipe> set, 
+            IIngredientTypesService ingredientTypesService,
             IRecipeIngredientsService ingredientsService,
-            IRecipeImagesService recipeImagesesService,
-            IRecipeStepsService recipeStepsesService,
+            IRecipeImagesService recipeImagesService,
+            IRecipeStepsService recipeStepsService,
             IDbContext context)
             : base(set, context)
         {
+            if (ingredientTypesService == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             if (ingredientsService == null)
             {
                 throw new ArgumentNullException(nameof(ingredientsService));
             }
 
-            if (recipeImagesesService == null)
+            if (recipeImagesService == null)
             {
-                throw new ArgumentNullException(nameof(recipeImagesesService));
+                throw new ArgumentNullException(nameof(recipeImagesService));
             }
 
-            if (recipeStepsesService == null)
+            if (recipeStepsService == null)
             {
-                throw new ArgumentNullException(nameof(recipeStepsesService));
+                throw new ArgumentNullException(nameof(recipeStepsService));
             }
 
+            this.ingredientTypesService = ingredientTypesService;
             this.ingredientsService = ingredientsService;
-            this.recipeImagesesService = recipeImagesesService;
-            this.recipeStepsesService = recipeStepsesService;
+            this.recipeImagesService = recipeImagesService;
+            this.recipeStepsService = recipeStepsService;
         }
 
         private void ValidateTitle(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
-                throw new ArgumentException("Title cant be empty");
+                throw new ArgumentNullException(nameof(title));
             }
-        }
 
-        private void ValidateIngredients(string[] ingredients)
-        {
-            if (ingredients == null ||
-                ingredients.Length == 0 ||
-                ingredients.All(string.IsNullOrWhiteSpace) ||
-                ingredients.Any(i => !Regex.IsMatch(i, "\\W|_")))
+            if (!Regex.IsMatch(title, "[а-яА-Яa-zA-Z]"))
             {
-                throw new ArgumentException("Ingredients empty or have invalid symbols in them");
+                throw new ArgumentException("Title must contain words");
             }
-        }
 
-        private void ValidateImages(string[] imagesData)
-        {
-            const int PhotoMaxSize = (3 * 1024 * 1024);
-
-            if (imagesData != null && imagesData.Any(p => p.Length > PhotoMaxSize))
+            if (this.Get(r => r.Title == title) != null)
             {
-                throw new ArgumentException("Image limit is " + (PhotoMaxSize / 1024) / 1024 + " mibs (mbs)");
+                throw new InvalidOperationException("Recipe with same title already exists");
             }
         }
 
-        private void ValidateStepsTexts(string[] stepsTexts)
+        private void ValidateSteps(string[] stepsTexts, int?[] stepsMinutes)
         {
-            const int MinLength = 3;
-
             if (stepsTexts == null ||
-                stepsTexts.Length == 0 ||
-                stepsTexts.All(string.IsNullOrWhiteSpace) ||
-                stepsTexts.Any(s => s.Trim().Length < MinLength))
+                stepsMinutes == null ||
+                stepsTexts.Count(st => !string.IsNullOrWhiteSpace(st)) != stepsMinutes.Length)
             {
-                throw new ArgumentException($"Steps must be at least {MinLength} symbols long");
+                throw new ArgumentException("Invalid steps data");
             }
         }
 
-        private void ValidateStepsMinutes(int?[] stepsMinutes)
+        private void ValidateIngredients(string[] ingredientsNames,
+                                         QuantityMeasurementType[] ingredientsMeasurementTypes,
+                                         int[] ingredientsQuantities)
         {
-            if (stepsMinutes != null &&
-                stepsMinutes.Any(s => s != null && s <= 0))
+            if (ingredientsNames.Length != ingredientsMeasurementTypes.Length ||
+                ingredientsNames.Length != ingredientsQuantities.Length ||
+                ingredientsMeasurementTypes.Length != ingredientsQuantities.Length)
             {
-                throw new ArgumentException("Minutes required for step must be positive number");
+                throw new ArgumentException("Ingredients data not valid.");
             }
         }
 
-        private void ValidateMinutesRequiredForCooking(int minutesRequiredForCooking)
+        private void ValidateAuthor(ApplicationUser author)
         {
-            if (minutesRequiredForCooking <= 0)
-            {
-                throw new ArgumentException("Minutes required for cooking must be positive number");
-            }
-        }
-
-        private void SaveImagesLocally(string[] imagesData, string recipeTitle, string path)
-        {
-            for (int i = 0; i < imagesData.Length; i++)
-            {
-                var image = ImageUtils.ConvertBase64ToImage(imagesData[i]);
-                var imageName = $"{path} + {recipeTitle} + {i}.jpg";
-                image.Save(imageName, ImageFormat.Jpeg);
-            }
-        }
-
-        public Recipe Create(CreateRecipeBindingModel bindingModel, ApplicationUser author)
-        {
-            this.ValidateTitle(bindingModel.Title);
-            //TODO: Validate ingredients
-            this.ValidateImages(bindingModel.Images);
-            this.ValidateStepsTexts(bindingModel.StepsTexts);
-            this.ValidateStepsMinutes(bindingModel.StepsMinutes);
-            this.ValidateMinutesRequiredForCooking(bindingModel.MinutesRequiredForCooking);
-
             if (author == null)
             {
                 throw new ArgumentNullException(nameof(author));
             }
+        }
 
-            var path = $"/../../NzKvoDaQm/App_Data/Recipe Images/{author.UserName}/{bindingModel.Title}/";
-            this.SaveImagesLocally(bindingModel.Images, bindingModel.Title, path);
+        private void ValidateCookingRequiredMinutesForMinutes(int minutes)
+        {
+            if (minutes <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(minutes));
+            }
+        }
+        
+        private IList<Ingredient> CreateIngredients(
+            string[] ingredientsNames, 
+            QuantityMeasurementType[] ingredientsMeasurementTypes, 
+            int[] ingredientsQuantities)
+        {
+            var ingredients = new List<Ingredient>();
+
+            for (int i = 0; i < ingredientsNames.Length; i++)
+            {
+                var ingredientName = ingredientsNames[i];
+                var ingredientMeasurementType = ingredientsMeasurementTypes[i];
+                var ingredientQuantity = ingredientsQuantities[i];
+
+                var ingredientType = this.ingredientTypesService.Get(it => it.Name == ingredientName)
+                    .ToList()
+                    .FirstOrDefault();
+
+                if (ingredientName == null)
+                {
+                    ingredientType = this.ingredientTypesService.Create(ingredientName, null);
+                }
+
+                var ingredient = this.ingredientsService.Create(
+                    ingredientType,
+                    ingredientMeasurementType,
+                    ingredientQuantity);
+
+                ingredients.Add(ingredient);
+            }
+
+            return ingredients;
+        }
+
+        private IList<RecipeImage> CreateImages(string[] imagesData, ApplicationUser author)
+        {
+            var images = new List<RecipeImage>();
+
+            for (int i = 0; i < imagesData.Length; i++)
+            {
+                var imageData = imagesData[i];
+                var image = this.recipeImagesService.Create(imageData, author);
+                images.Add(image);
+            }
+
+            return images;
+        }
+
+        private IList<RecipeStep> CreateSteps(string[] stepsTexts, int?[] stepsMinutes)
+        {
+            var steps = new List<RecipeStep>();
+
+            for (int i = 0; i < stepsTexts.Length; i++)
+            {
+                var text = stepsTexts[i];
+                var minutes = stepsMinutes[i];
+                var step = this.recipeStepsService.Create(text, minutes);
+                steps.Add(step);
+            }
+
+            return steps;
+        }
+        
+        public Recipe Create(CreateRecipeBindingModel bindingModel, ApplicationUser author)
+        {
+            this.ValidateTitle(bindingModel.Title);
+            this.ValidateSteps(bindingModel.StepsTexts, bindingModel.StepsMinutes);
+            this.ValidateIngredients(
+                bindingModel.IngredientsNames, 
+                bindingModel.IngredientsMeasurementTypes, 
+                bindingModel.IngredientsQuantities);
+            this.ValidateAuthor(author);
+            this.ValidateCookingRequiredMinutesForMinutes(bindingModel.MinutesRequiredForCooking);
             
-            var imagesPath = $"/../../NzKvoDaQm/App_Data/Recipe Images/{author.UserName}/{bindingModel.Title}";
-            var images = Directory.GetFiles(imagesPath);
-            var imagesUrls =
-                images.Select(
-                    i => $"App_Data/Recipe Images/{author.UserName}/{bindingModel.Title}/{Path.GetFileName(i)}");
-            /*
+            var ingredients = this.CreateIngredients(
+                bindingModel.IngredientsNames,
+                bindingModel.IngredientsMeasurementTypes,
+                bindingModel.IngredientsQuantities);
+            var images = this.CreateImages(bindingModel.Images, author);
+            var steps = this.CreateSteps(bindingModel.StepsTexts, bindingModel.StepsMinutes);
+            
             var recipe = new Recipe()
             {
                 Title = bindingModel.Title,
-                Ingredients = this.ingredientsService.Create(bindingModel.Ingredients),
-                Images = this.recipeImagesService.Create(imagesUrls),
-                Steps = this.recipeStepsService.Create(bindingModel.StepsTexts, bindingModel.StepsMinutes),
+                Ingredients = ingredients,
+                Images = images,
+                Steps = steps,
                 MinutesRequiredToCook = bindingModel.MinutesRequiredForCooking,
                 Author = author
             };
             
             this.Set.Add(recipe);
-            
+            this.SaveChanges();
+
             return recipe;
-            */
-            throw new NotImplementedException();
         }
     }
 }

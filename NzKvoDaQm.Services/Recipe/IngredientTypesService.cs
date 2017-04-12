@@ -33,7 +33,7 @@ namespace NzKvoDaQm.Services.Recipe
                 throw new ArgumentException("Name cant be empty");
             }
 
-            if (Regex.IsMatch(name, "[^a-zA-Z]"))
+            if (!Regex.IsMatch(name, "[à-ÿÀ-ßa-zA-Z]"))
             {
                 throw new ArgumentException();
             }
