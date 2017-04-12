@@ -118,6 +118,7 @@
     <Compile Include="Services\RecipeImagesService\CreateTests.cs" />
     <Compile Include="Services\RecipeIngredientsService\CreateTests.cs" />
     <Compile Include="Services\RecipeService\CreateRecipeServiceTests.cs" />
+    <Compile Include="Services\RecipeStepService\CreateTests.cs" />
     <Compile Include="Services\SearchService\Constraints\ОтTests.cs" />
     <Compile Include="Services\SearchService\Constraints\БезTests.cs" />
     <Compile Include="Services\SearchService\Constraints\ЗаTests.cs" />

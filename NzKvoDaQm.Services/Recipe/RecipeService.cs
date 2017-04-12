@@ -18,13 +18,13 @@
     {
         private readonly IRecipeIngredientsService ingredientsService;
         private readonly IRecipeImagesService recipeImagesesService;
-        private readonly IRecipeStepService recipeStepsService;
+        private readonly IRecipeStepsService recipeStepsesService;
 
         public RecipeService(
             IDbSet<Recipe> set, 
             IRecipeIngredientsService ingredientsService,
             IRecipeImagesService recipeImagesesService,
-            IRecipeStepService recipeStepsService,
+            IRecipeStepsService recipeStepsesService,
             IDbContext context)
             : base(set, context)
         {
@@ -38,14 +38,14 @@
                 throw new ArgumentNullException(nameof(recipeImagesesService));
             }
 
-            if (recipeStepsService == null)
+            if (recipeStepsesService == null)
             {
-                throw new ArgumentNullException(nameof(recipeStepsService));
+                throw new ArgumentNullException(nameof(recipeStepsesService));
             }
 
             this.ingredientsService = ingredientsService;
             this.recipeImagesesService = recipeImagesesService;
-            this.recipeStepsService = recipeStepsService;
+            this.recipeStepsesService = recipeStepsesService;
         }
 
         private void ValidateTitle(string title)

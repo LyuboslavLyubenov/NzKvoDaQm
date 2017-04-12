@@ -1,4 +1,4 @@
-﻿namespace NzKvoDaQm.Tests.Services.RecipeIngredientsService
+﻿namespace NzKvoDaQm.Tests.Services.RecipeStepsService
 {
 
     using System;

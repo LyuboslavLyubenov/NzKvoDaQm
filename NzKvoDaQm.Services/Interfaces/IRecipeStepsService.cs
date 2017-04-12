@@ -3,7 +3,7 @@
 
     using NzKvoDaQm.Models.EntityModels;
 
-    public interface IRecipeStepService : IEntityService<RecipeStep>
+    public interface IRecipeStepsService : IEntityService<RecipeStep>
     {
         RecipeStep Create(string text, int? timeToFinishInMinutes);
     }

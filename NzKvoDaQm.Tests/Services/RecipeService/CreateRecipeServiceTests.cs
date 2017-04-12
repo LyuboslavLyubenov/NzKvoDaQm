@@ -41,7 +41,7 @@
 
             var ingredientsService = new RecipeIngredientsService(this.context.Ingredients, this.context);
             var recipeImagesService = new RecipeImagesService(this.context.RecipeImages, this.context);
-            var recipeStepService = new RecipeStepService(this.context.RecipeSteps, this.context);
+            var recipeStepService = new RecipeStepsService(this.context.RecipeSteps, this.context);
             this.recipesService = 
                 new RecipeService(
                     this.context.Recipes, 
