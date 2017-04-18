@@ -3,6 +3,7 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Reflection;
     using System.Text.RegularExpressions;
@@ -19,7 +20,7 @@
         private static readonly Type[] searchConstraintsTypes;
 
         private readonly Regex regex = new Regex(ConstraintsPattern, RegexOptions.Compiled);
-        
+
         private readonly IDbContext context;
         private readonly string[] wordsToSearchFor;
         private readonly ISearchConstraint[] searchConstraints;
@@ -45,15 +46,15 @@
             {
                 throw new ArgumentNullException("query");
             }
-            
+
             this.context = context;
             this.wordsToSearchFor = Regex.Replace(query, ConstraintsPattern, "")
-                .Split(new char[] {}, StringSplitOptions.RemoveEmptyEntries)
+                .Split(new char[] { }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(w => w.Trim().ToUpper())
                 .ToArray();
             this.searchConstraints = this.ExtractSearchConstraints(query);
         }
-        
+
         private ISearchConstraint[] ExtractSearchConstraints(string query)
         {
             var constraintsMatches = this.regex.Matches(query);
@@ -101,16 +102,22 @@
                            r => this.wordsToSearchFor.Any(w => r.Title.ToUpper().Contains(w.ToUpper())));
             }
 
+            recipesContainingSelectedWords = recipesContainingSelectedWords.Include(r => r.Images)
+                .Include(r => r.Ingredients)
+                .Include(r => r.Ingredients.Select(i => i.IngredientType))
+                .ToList()
+                .AsQueryable();
+
             if (this.searchConstraints.Length != 0)
             {
-                var result = recipesContainingSelectedWords.Where(r => this.searchConstraints.All(s => s.IsAllowed(r)))
-                    .AsQueryable();
+                var result = recipesContainingSelectedWords
+                    .Where(r => this.searchConstraints.All(s => s.IsAllowed(r)));
                 return result;
             }
             else
             {
                 return recipesContainingSelectedWords;
-            }    
+            }
         }
     }
 }

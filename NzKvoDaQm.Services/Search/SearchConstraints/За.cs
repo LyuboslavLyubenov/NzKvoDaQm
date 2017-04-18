@@ -67,7 +67,7 @@
             {
                 allowedTo = currentTime.AddMinutes(this.timeNumber);
             }
-            else if (this.timeTypeUpper == "часа".ToUpper())
+            else if (this.timeTypeUpper == "часа".ToUpper() || this.timeTypeUpper == "час".ToUpper())
             {
                 allowedTo = currentTime.AddHours(this.timeNumber);
             }
