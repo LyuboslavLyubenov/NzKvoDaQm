@@ -3,6 +3,10 @@
     ViewBag.Title = "Search";
 }
 
+@section CSS {
+    <link rel="stylesheet" type="text/css" href="/Content/search-bar.css">
+}
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -12,16 +16,24 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @using (Html.BeginForm("Index", "Home", FormMethod.Get, new
-                                                                  {
-                                                                      @id = "search-form"
-                                                                  }))
+                                                                    {
+                                                                        @id = "search-form"
+                                                                    }))
             {
                 @Html.TextBox("query", null, new
                                              {
                                                  @id = "searchbox", @class = "form-control"
                                              })
-
-                <input type="submit" id="search-button" class="btn btn-lg btn-primary btn-success" value="Търси!"/>
+                
+                
+                <a href="#" id="search-button" class="btn btn-lg btn-primary btn-success">
+                    <span class="glyphicon glyphicon-search"></span>
+                    <script type="text/javascript">
+                        $('#search-button').click(function() {
+                            $('#search-form').submit();
+                        });
+                    </script>
+                </a>
             }
         </div>
     </div>
@@ -63,4 +75,3 @@
         </div>
     }
 </div>
-

@@ -100,10 +100,17 @@
                        this.context.Recipes.Where(
                            r => this.wordsToSearchFor.Any(w => r.Title.ToUpper().Contains(w.ToUpper())));
             }
-                    
-            var result = recipesContainingSelectedWords.Where(r => this.searchConstraints.All(s => s.IsAllowed(r)))
-                .AsQueryable();
-            return result;
+
+            if (this.searchConstraints.Length != 0)
+            {
+                var result = recipesContainingSelectedWords.Where(r => this.searchConstraints.All(s => s.IsAllowed(r)))
+                    .AsQueryable();
+                return result;
+            }
+            else
+            {
+                return recipesContainingSelectedWords;
+            }    
         }
     }
 }

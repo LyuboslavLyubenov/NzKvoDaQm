@@ -3,6 +3,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section CSS {
+    <link rel="stylesheet" type="text/css" href="/Content/add-recipe.css">
+}
+
+
 <h2 style="text-align: center">Добави рецепта</h2>
 
 <div class="col-md-8 col-md-offset-2">
@@ -45,3 +50,6 @@
 </div>
 
 <script type="text/javascript" src="/Scripts/recipes/createRecipe.js"></script>
+<script type="text/javascript">
+    addCSSFile('/Content/add-recipe.css');
+</script>

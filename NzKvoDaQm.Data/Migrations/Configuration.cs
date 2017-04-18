@@ -237,12 +237,14 @@ namespace NzKvoDaQm.Data.Migrations
                             new RecipeImage()
                             {
                                 Id = 1,
-                                Url = "http://recepti.gotvach.bg/files/lib/600x350/spageti31.jpg"
+                                Url = "http://recepti.gotvach.bg/files/lib/600x350/spageti31.jpg",
+                                Author = context.Users.ToList().Skip(1).First()
                             },
                             new RecipeImage()
                             {
                                 Id = 2,
-                                Url = "http://gotvach.bg/files/recipes/photos/p_20160204_085608_12009.jpg"
+                                Url = "http://gotvach.bg/files/recipes/photos/p_20160204_085608_12009.jpg",
+                                Author = context.Users.ToList().Skip(1).First()
                             },
                         },
                 Ingredients = products,
