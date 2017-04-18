@@ -31,13 +31,19 @@
 
     $('#submit-button').click(function () {
         extractFormData().then(function (data) {
+
             $.ajax({
+                beforeSend: function (xhr) {
+                    let token = $('input[name="__RequestVerificationToken"]').val();
+                    xhr.setRequestHeader('__RequestVerificationToken', token);
+                },
                 type: "POST",
                 url: "/Recipes/Create",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: JSON.stringify(data),
                 processData: false,
+                cache: false,
                 success: function () {
                     alert("Успешно качена рецепта!");
                 },
@@ -76,7 +82,7 @@
         $('.ingredient').each(function (index, element) {
             let ingredientName = $(element).find('.ingredient-name').val();
             let ingredientMeasurementType = $(element).find('.ingredient-measurement-type').val();
-            let ingredientQuantity = $(element).find('.ingredient-quantity-type').val();
+            let ingredientQuantity = $(element).find('.ingredient-quantity').val();
             data["IngredientsNames"].push(ingredientName);
             data["IngredientsMeasurementTypes"].push(ingredientMeasurementType);
             data["IngredientsQuantities"].push(ingredientQuantity);

@@ -16,20 +16,21 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @using (Html.BeginForm("Index", "Home", FormMethod.Get, new
-                                                                    {
-                                                                        @id = "search-form"
-                                                                    }))
+            {
+                @id = "search-form"
+            }))
             {
                 @Html.TextBox("query", null, new
-                                             {
-                                                 @id = "searchbox", @class = "form-control"
-                                             })
-                
-                
+           {
+               @id = "searchbox",
+               @class = "form-control"
+           })
+
+
                 <a href="#" id="search-button" class="btn btn-lg btn-primary btn-success">
                     <span class="glyphicon glyphicon-search"></span>
                     <script type="text/javascript">
-                        $('#search-button').click(function() {
+                        $('#search-button').click(function () {
                             $('#search-form').submit();
                         });
                     </script>
@@ -50,7 +51,7 @@
                 <div class="col-md-4">
                     <div class="recipe">
                         <a href="#" class="recipe-title">@recipe.Title</a>
-                        <img class="recipe-image" src="@recipe.Images.First().Url"/>
+                        <img class="recipe-image" src="@recipe.Images.First().Url" />
                         <div class="recipe-footer">
                             <div class="recipe-ingredients">
                                 Съставки:
@@ -67,7 +68,7 @@
                             <span class="recipe-time-required-to-cook">
                                 <span class="glyphicon glyphicon-time"></span>
                                 @recipe.MinutesRequiredToCook мин.
-                            </span>    
+                            </span>
                         </div>
                     </div>
                 </div>

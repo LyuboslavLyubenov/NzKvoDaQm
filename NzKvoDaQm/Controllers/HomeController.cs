@@ -1,14 +1,11 @@
 ﻿namespace NzKvoDaQm.Controllers
 {
     using System;
-    using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
 
     using NzKvoDaQm.Data;
-    using NzKvoDaQm.Models.EntityModels;
     using NzKvoDaQm.Models.ViewModels;
-    using NzKvoDaQm.Services;
     using NzKvoDaQm.Services.Interfaces;
     using NzKvoDaQm.Services.Search;
 
