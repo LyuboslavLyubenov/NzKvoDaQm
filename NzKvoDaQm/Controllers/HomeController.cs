@@ -36,30 +36,19 @@
 
         public HomeController() : this(new NzKvoDaQmContext(), new SearchService())
         {
-            
+
         }
-        
+
         public ActionResult Index(string query)
         {
-            Recipe[] recipes;
+            var recipes = this.searchService.GetRecipes(query)
+                .ToList()
+                .ToArray();
 
-            if (string.IsNullOrWhiteSpace(query) || query.ToUpper() == "всички")
-            {
-                recipes = this.context.Recipes.Include(r => r.Images)
-                    .Include(r => r.Ingredients)
-                    .Include(r => r.Ingredients.Select(i => i.IngredientType))
-                    .ToList()
-                    .ToArray();
-            }
-            else
-            {
-                recipes = this.searchService.GetRecipes(query).ToArray();
-            }
-            
             var viewModel = new SearchViewModel()
-                            {
-                                Recipes = recipes
-                            };
+            {
+                Recipes = recipes
+            };
 
             return this.View(viewModel);
         }
