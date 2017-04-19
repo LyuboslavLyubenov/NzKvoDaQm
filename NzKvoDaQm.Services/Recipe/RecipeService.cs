@@ -69,7 +69,7 @@
                 throw new ArgumentException("Title must contain words");
             }
 
-            if (this.Get(r => r.Title == title) != null)
+            if (this.Set.Any() && this.Get(r => r.Title == title).Any())
             {
                 throw new InvalidOperationException("Recipe with same title already exists");
             }
@@ -89,7 +89,10 @@
                                          QuantityMeasurementType[] ingredientsMeasurementTypes,
                                          int[] ingredientsQuantities)
         {
-            if (ingredientsNames.Length != ingredientsMeasurementTypes.Length ||
+            if (ingredientsNames == null || 
+                ingredientsMeasurementTypes == null || 
+                ingredientsQuantities == null ||
+                ingredientsNames.Length != ingredientsMeasurementTypes.Length ||
                 ingredientsNames.Length != ingredientsQuantities.Length ||
                 ingredientsMeasurementTypes.Length != ingredientsQuantities.Length)
             {
@@ -127,13 +130,8 @@
                 var ingredientQuantity = ingredientsQuantities[i];
 
                 var ingredientType = this.ingredientTypesService.Get(it => it.Name == ingredientName)
-                    .ToList()
-                    .FirstOrDefault();
-
-                if (ingredientName == null)
-                {
-                    ingredientType = this.ingredientTypesService.Create(ingredientName, null);
-                }
+                                         .ToList()
+                                         .FirstOrDefault() ?? this.ingredientTypesService.Create(ingredientName, null);
 
                 var ingredient = this.ingredientsService.Create(
                     ingredientType,

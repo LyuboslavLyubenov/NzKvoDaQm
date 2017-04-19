@@ -47,8 +47,20 @@
                 success: function () {
                     alert("Успешно качена рецепта!");
                 },
-                error: function () {
-                    alert("Проблем при качването на рецептата!");
+                error: function (xhr, status, errorThrown) {
+                    $.notify({
+                        message: JSON.parse(xhr.responseText).error
+                    }, {
+                        type: 'danger',
+                        placement: {
+                            from: "top",
+                            align: "center"
+                        },
+                        animate: {
+                            enter: 'animated fadeInDown',
+                            exit: 'animated fadeOutUp'
+                        },
+                    });
                 }
             });
         });
