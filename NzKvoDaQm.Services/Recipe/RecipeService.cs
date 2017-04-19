@@ -79,7 +79,7 @@
         {
             if (stepsTexts == null ||
                 stepsMinutes == null ||
-                stepsTexts.Count(st => !string.IsNullOrWhiteSpace(st)) != stepsMinutes.Length)
+                stepsTexts.Count(st => !string.IsNullOrWhiteSpace(st)) != stepsMinutes.Where(m => m != null).Count())
             {
                 throw new ArgumentException("Invalid steps data");
             }

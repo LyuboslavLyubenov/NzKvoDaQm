@@ -7,6 +7,7 @@
     using NzKvoDaQm.Models.EntityModels;
 
     using System;
+    using System.Web.Script.Serialization;
 
     using Microsoft.AspNet.Identity;
 
@@ -66,14 +67,14 @@
         [Authorize]
         [ValidateJsonAntiForgeryToken]
         [HttpPost]
-        public ActionResult Create(CreateRecipeBindingModel bindingModel)
+        public ActionResult Create(CreateRecipeBindingModel createRecipeBindingModel)
         {
             var userId = this.User.Identity.GetUserId();
             var user = this.context.Users.Find(userId);
 
             try
             {
-                this.recipeService.Create(bindingModel, user);
+                this.recipeService.Create(createRecipeBindingModel, user);
             }
             catch (Exception exception)
             {
