@@ -1,1 +1,30 @@
-﻿
+﻿#recipe-title {
+    width: 100%;
+    margin: 0 auto;
+    vertical-align: central;
+    text-align: center;
+    margin-top: 40px;
+}
+
+label {
+    font-size: 16px;
+}
+
+.recipe-container {
+    width: 80%;
+    display: block;
+    border: 1px dotted rgba(0, 0, 0, 0.25);
+    margin: 0 auto;
+}
+
+.recipe-image {
+    display: inline-block;
+    width: auto;
+    height: 300px;
+}
+
+#images-slider-container {
+    display: block;
+    margin: 0 auto;
+    width: 400px;
+}

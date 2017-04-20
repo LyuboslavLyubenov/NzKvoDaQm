@@ -1,35 +1,82 @@
-﻿@model NzKvoDaQm.Models.EntityModels.Recipe
+﻿@using NzKvoDaQm.Extensions
+@model NzKvoDaQm.Models.EntityModels.Recipe
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+@section CSS {
+    <link rel="stylesheet" type="text/css" href="/Content/jquery.bxslider.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Content/recipe-details.css">
+}
+<div class="col-md-8 col-md-offset-2">
 
-<div>
-    <h4>Recipe</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MinutesRequiredToCook)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MinutesRequiredToCook)
-        </dd>
-
-    </dl>
+    <div class="form-group">
+        <h2 id="recipe-title">@Model.Title</h2>
+    </div>
+    <hr>
+    <div class="form-group">
+        <div id="images-slider-container">
+            <ul id="images-slider">
+                @foreach (var recipeImage in @Model.Images)
+                {
+                    <li>
+                        <img class="recipe-image" src="@recipeImage.Url" />
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group">
+        <label>Съставки</label>
+        <div id="ingredients-container">
+            @{
+                foreach (var ingredient in @Model.Ingredients)
+                {
+                    <div class="ingredient">
+                        @ingredient.IngredientType.Name @ingredient.Quantity @Html.TranslateQuantityMeasurementTypes(ingredient.QuantityMeasurementType)
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <hr>
+    <div class="form-group">
+        <label>Стъпки</label>
+        <div id="steps-container">
+            <ol>
+                @for (int i = 0; i < @Model.Steps.Count; i++)
+                {
+                    var step = @Model.Steps[i];
+                    
+                    <text>
+                        <li class="step">
+                            @step.Text 
+                            @if (@Model.Steps[i].TimeToFinishInMinutes != null)
+                            {
+                                <text>
+                                    за @Model.Steps[i].TimeToFinishInMinutes минути
+                                </text>
+                            }
+                        </li>
+                    </text>
+                }    
+            </ol>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group">
+        <label>Минути необходими за да се сготви</label>
+        <span id="minutesRequiredToCook">@Model.MinutesRequiredToCook</span>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<script src="/Scripts/jquery.bxslider.min.js"></script>
+<script type="text/javascript">
+    $('#images-slider').bxSlider({
+        auto: true,
+        slideWidth: 400
+    });
+</script>

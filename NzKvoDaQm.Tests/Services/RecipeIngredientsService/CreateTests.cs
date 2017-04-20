@@ -31,24 +31,24 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void CantCreateIfIngredientTypeIsNull()
         {
-            this.service.Create(null, QuantityMeasurementType.Gram, 10);
+            this.service.Create(null, QuantityMeasurementType.Grams, 10);
         }
         
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CantCreateIfQuantityIsNotPositiveNumber()
         {
-            this.service.Create(new IngredientType(), QuantityMeasurementType.Gram, -10);
+            this.service.Create(new IngredientType(), QuantityMeasurementType.Grams, -10);
         }
 
         [TestMethod]
         public void Create()
         {
             var ingredientType = this.context.IngredientTypes.First();
-            var entity = this.service.Create(ingredientType, QuantityMeasurementType.Gram, 100);
+            var entity = this.service.Create(ingredientType, QuantityMeasurementType.Grams, 100);
 
             Assert.AreEqual(ingredientType, entity.IngredientType);
-            Assert.AreEqual(QuantityMeasurementType.Gram, entity.QuantityMeasurementType);
+            Assert.AreEqual(QuantityMeasurementType.Grams, entity.QuantityMeasurementType);
             Assert.AreEqual(100, entity.Quantity);
         }
     }

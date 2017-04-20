@@ -49,11 +49,11 @@
 
     public enum QuantityMeasurementType
     {
-        Liter,
-        Milliliter,
-        Tablespoon,
-        Dessertspoon,
-        Gram,
-        Kilogram
+        Liters,
+        Milliliters,
+        Tablespoons,
+        Dessertspoons,
+        Grams,
+        Kilograms
     }
 }

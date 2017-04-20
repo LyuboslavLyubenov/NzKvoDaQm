@@ -36,8 +36,8 @@
                                    },
                 IngredientsMeasurementTypes = new []
                                               {
-                                                  QuantityMeasurementType.Gram, 
-                                                  QuantityMeasurementType.Gram, 
+                                                  QuantityMeasurementType.Grams, 
+                                                  QuantityMeasurementType.Grams, 
                                               },
                 IngredientsQuantities = new []
                                         {

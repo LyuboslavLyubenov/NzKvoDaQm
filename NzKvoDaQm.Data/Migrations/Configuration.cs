@@ -134,7 +134,7 @@ namespace NzKvoDaQm.Data.Migrations
             {
                 Id = 1,
                 IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Спагети".ToUpper()),
-                QuantityMeasurementType = QuantityMeasurementType.Gram,
+                QuantityMeasurementType = QuantityMeasurementType.Grams,
                 Quantity = 500
             };
 
@@ -142,7 +142,7 @@ namespace NzKvoDaQm.Data.Migrations
             {
                 Id = 2,
                 IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Лук".ToUpper()),
-                QuantityMeasurementType = QuantityMeasurementType.Gram,
+                QuantityMeasurementType = QuantityMeasurementType.Grams,
                 Quantity = 100
             };
 
@@ -150,28 +150,28 @@ namespace NzKvoDaQm.Data.Migrations
             {
                 Id = 3,
                 IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Чесън".ToUpper()),
-                QuantityMeasurementType = QuantityMeasurementType.Gram,
+                QuantityMeasurementType = QuantityMeasurementType.Grams,
                 Quantity = 20
             };
             var tomato = new Ingredient()
             {
                 Id = 4,
                 IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Домат".ToUpper()),
-                QuantityMeasurementType = QuantityMeasurementType.Gram,
+                QuantityMeasurementType = QuantityMeasurementType.Grams,
                 Quantity = 500
             };
             var tomatoSauce = new Ingredient()
             {
                 Id = 5,
                 IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Доматен сок".ToUpper()),
-                QuantityMeasurementType = QuantityMeasurementType.Milliliter,
+                QuantityMeasurementType = QuantityMeasurementType.Milliliters,
                 Quantity = 300
             };
             var water = new Ingredient()
             {
                 Id = 6,
                 IngredientType = context.IngredientTypes.First(p => p.Name.ToUpper() == "Вода".ToUpper()),
-                QuantityMeasurementType = QuantityMeasurementType.Liter,
+                QuantityMeasurementType = QuantityMeasurementType.Liters,
                 Quantity = 2
             };
 

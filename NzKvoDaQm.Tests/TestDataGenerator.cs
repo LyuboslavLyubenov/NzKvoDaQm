@@ -74,19 +74,19 @@
                        new Ingredient()
                        {
                            IngredientType = ingredientTypes[0],
-                           QuantityMeasurementType = QuantityMeasurementType.Gram,
+                           QuantityMeasurementType = QuantityMeasurementType.Grams,
                            Quantity = 200
                        },
                        new Ingredient()
                        {
                            IngredientType = ingredientTypes[1],
-                           QuantityMeasurementType = QuantityMeasurementType.Milliliter,
+                           QuantityMeasurementType = QuantityMeasurementType.Milliliters,
                            Quantity = 500
                        },
                        new Ingredient()
                        {
                            IngredientType = ingredientTypes[2],
-                           QuantityMeasurementType = QuantityMeasurementType.Gram,
+                           QuantityMeasurementType = QuantityMeasurementType.Grams,
                            Quantity = 500
                        }
                    };
