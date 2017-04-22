@@ -7,16 +7,19 @@
 }
 
 @section CSS {
-    <link rel="stylesheet" type="text/css" href="/Content/jquery.bxslider.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Content/jquery.bxslider.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/starwars.css" />
     <link rel="stylesheet" type="text/css" href="/Content/recipe-details.css">
 }
+
 <div class="col-md-8 col-md-offset-2">
 
-    <div class="form-group">
+    <div>
         <h2 id="recipe-title">@Model.Title</h2>
+        <div id="rating"></div>
     </div>
     <hr>
-    <div class="form-group">
+    <div>
         <div id="images-slider-container">
             <ul id="images-slider">
                 @foreach (var recipeImage in @Model.Images)
@@ -29,7 +32,7 @@
         </div>
     </div>
     <hr>
-    <div class="form-group">
+    <div>
         <label>Съставки</label>
         <div id="ingredients-container">
             @{
@@ -43,17 +46,17 @@
         </div>
     </div>
     <hr>
-    <div class="form-group">
+    <div>
         <label>Стъпки</label>
         <div id="steps-container">
             <ol>
                 @for (int i = 0; i < @Model.Steps.Count; i++)
                 {
                     var step = @Model.Steps[i];
-                    
+
                     <text>
                         <li class="step">
-                            @step.Text 
+                            @step.Text
                             @if (@Model.Steps[i].TimeToFinishInMinutes != null)
                             {
                                 <text>
@@ -62,21 +65,108 @@
                             }
                         </li>
                     </text>
-                }    
+                }
             </ol>
         </div>
     </div>
     <hr>
-    <div class="form-group">
+    <div>
         <label>Минути необходими за да се сготви</label>
         <span id="minutesRequiredToCook">@Model.MinutesRequiredToCook</span>
+    </div>
+    <hr>
+    <div>
+        <label>Оценки:</label>
+        <div id="review-container">
+            @foreach (var review in @Model.Reviews)
+            {
+                <div class="review">
+                    <h5>@review.Title</h5>
+                    <div class="review-rating"></div>
+                    <span class="review-author">@review.Author.UserName</span>
+                    <textarea class="review-body" disabled="disabled">@review.Body</textarea>
+                </div>
+            }
+
+        </div>
     </div>
 </div>
 
 <script src="/Scripts/jquery.bxslider.min.js"></script>
+<script src="/Scripts/starwars.js"></script>
 <script type="text/javascript">
+
+    (function() {
+        let stars = 0;
+
+        @if (@Model.Reviews.Any())
+    {
+        <text>
+        stars = @Model.Reviews.Sum(r => (int)r.Rating + 1) / @Model.Reviews.Count;
+        </text>
+    }
+
+        $('#rating').starwarsjs({
+            stars: 5,
+            default_stars: stars,
+            on_select: function() {
+                 dontAllowToModifyRating($('#rating'), stars);
+            }
+        });
+    })();
+
     $('#images-slider').bxSlider({
         auto: true,
         slideWidth: 400
     });
+
+    (function() {
+        let reviewsRatings = [@string.Join(", ", Model.Reviews.Select(r => (int)r.Rating))];
+        $('.review').each(function(index, review) {
+            let reviewRating = $(review).find('.review-rating')[0];
+            $(reviewRating).starwarsjs({
+                target: getSelector(reviewRating),
+                stars: 5,
+                default_stars: reviewsRatings[index],
+                on_select: function() {
+                    dontAllowToModifyRating($(reviewRating), reviewsRatings[index]);
+                }
+            });
+        });
+    })();
+
+    function getSelector(element) {
+        var selector = $(element)
+            .parents()
+            .map(function() { return this.tagName; })
+            .get()
+            .reverse()
+            .concat([this.nodeName])
+            .join(">");
+
+        var id = $(element).attr("id");
+        if (id) { 
+            selector += "#"+ id;
+        }
+
+        var classNames = $(element).attr("class");
+        if (classNames) {
+            selector += "." + $.trim(classNames).replace(/\s/gi, ".");
+        }
+    
+        return selector;
+    }
+
+    function dontAllowToModifyRating(ratingContainer, defaultStars) {
+        let ratingStars = ratingContainer.find('.rate_star');
+
+        ratingStars.each(function(index, star) {
+            $(star).removeClass('checked');
+        }).promise().done(function() {
+            for (let i = 0; i < defaultStars; i++) {
+                let starThatShouldBeChecked = $(ratingStars[i]);
+                starThatShouldBeChecked.addClass('checked');
+            }
+        });
+    }
 </script>

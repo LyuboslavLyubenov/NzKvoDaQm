@@ -1,9 +1,9 @@
-﻿#recipe-title {
-    width: 100%;
-    margin: 0 auto;
-    vertical-align: central;
+﻿body {
     text-align: center;
-    margin-top: 40px;
+}
+
+#recipe-title {
+    display: inline-block;
 }
 
 label {
@@ -27,4 +27,11 @@ label {
     display: block;
     margin: 0 auto;
     width: 400px;
+}
+
+.step {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 10px 20px 10px;
+    text-align: left;
 }

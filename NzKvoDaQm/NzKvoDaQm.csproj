@@ -206,8 +206,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\starwarsjs.svg" />
     <Content Include="Content\recipe-details.css" />
     <Content Include="Content\search-bar.css" />
+    <Content Include="Content\starwars.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -224,12 +226,15 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\fonts\starwarsjs.eot" />
+    <Content Include="Content\fonts\starwarsjs.ttf" />
+    <Content Include="Content\fonts\starwarsjs.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\images\bx_loader.gif" />
-    <Content Include="Scripts\images\controls.png" />
+    <Content Include="Content\images\bx_loader.gif" />
+    <Content Include="Content\images\controls.png" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
@@ -252,6 +257,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\starwars.js" />
     <Content Include="Scripts\vendor\jquery.easing.1.3.js" />
     <Content Include="Scripts\vendor\jquery.fitvids.js" />
     <Content Include="Scripts\_references.js" />
