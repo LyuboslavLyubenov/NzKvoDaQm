@@ -11,9 +11,9 @@
 
 <div class="col-md-8 col-md-offset-2">
     @using (Html.BeginForm("Create", "Recipes", FormMethod.Post, new
-    {
-        id = "create-recipe-form"
-    }))
+                                                                 {
+                                                                     id = "create-recipe-form"
+                                                                 }))
     {
         @Html.AntiForgeryToken()
         <div class="form-group">
@@ -22,9 +22,10 @@
         <hr>
         <div class="form-group">
             <label>Снимки</label>
-            <div id="add-photos">
+            <div id="images-container"></div>
+            <div id="add-images-container">
                 Добави снимки
-                <input type="file" class="btn" value="Добави снимки" multiple="multiple" />
+                <input type="file" id="add-images" class="btn" value="Добави снимки" multiple="multiple"/>
             </div>
         </div>
         <hr>
@@ -47,4 +48,12 @@
         <a id="submit-button" href="#" class="btn btn-lg btn-success">Създай</a>
     }
 </div>
+<div id="loading">
+    <img src="/Content/images/big_loader.gif" />
+</div>
+
 <script type="text/javascript" src="/Scripts/recipes/createRecipe.js"></script>
+
+<script type="text/javascript">
+    $('#loading').hide();
+</script>

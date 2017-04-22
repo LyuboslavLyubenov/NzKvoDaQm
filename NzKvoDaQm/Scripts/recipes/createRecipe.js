@@ -1,4 +1,5 @@
 ﻿(function() {
+    const imageTemplate = '<img class="recipe-image"/>';
 
     const ingredientTemplate =
         '<li class="ingredient ordered-list-item">' +
@@ -21,6 +22,45 @@
         'Нужно време: <input type="text" class="form-control step-minutes" oninput="this.value=this.value.replace(/[^0-9]/g,\'\');"/> минути' +
     '</li>';
 
+    $('#add-images').change(function() {
+
+        $('#loading').show();
+
+        $('#images-container').empty();
+
+        loadImages().done(function(data) {
+            populateImagesContainer(data);
+            $('#loading').hide();
+        });
+    });
+
+    function loadImages() {
+        let deferred = Q.defer();
+        let imagesData = [];
+        let images = $('#add-images').get(0).files;
+
+        for (let j = 0; j < images.length; j++) {
+            let reader = new FileReader();
+            reader.onload = function () {
+                imagesData.push(reader.result);
+                if (j === (images.length - 1)) {
+                    deferred.resolve(imagesData);
+                }
+            }
+            reader.readAsDataURL(images[j]);
+        }
+
+        return deferred.promise;
+    }
+
+    function populateImagesContainer(images) {
+        $.each(images, function(index, imageData) {
+            let image = $(imageTemplate);
+            image.attr('src', imageData);
+            $('#images-container').prepend(image);
+        });
+    }
+
     $('#add-ingredients').click(function() {
         $('#ingredients-container').append(ingredientTemplate);
     });
@@ -30,7 +70,7 @@
     });
 
     $('#submit-button').click(function () {
-        extractFormData().then(function(data) {
+        let data = extractFormData();
 
             $.ajax({
                 beforeSend: function(xhr) {
@@ -60,7 +100,6 @@
                             }
                         });
                 }
-        });
         });
     });
 
@@ -100,33 +139,16 @@
     }
 
     function extractFormData() {
-        let deferred = Q.defer();
         let data = {};
 
         data['Title'] = $('#title').val();
         
-        let images = $('#add-photos > input').get(0).files;
-
         data['Images'] = [];
 
-        if (images.length === 0) {
-            setTimeout(
-                function() {
-                    deferred.resolve(data);
-                },
-                10);
-        } else {
-            for (let j = 0; j < images.length; j++) {
-                let reader = new FileReader();
-                reader.onload = function (e) {
-                    data['Images'].push(reader.result);
-                    if (j === (images.length - 1)) {
-                        deferred.resolve(data);
-                    }
-                }
-                reader.readAsDataURL(images[j]);
-            }
-        }
+        $('#images-container').children().each(function(index, element) {
+            let imageData = $(element).attr('src');
+            data['Images'].push(imageData);
+        });
 
         let ingredientsData = extractIngredientsData();
 
@@ -141,6 +163,6 @@
 
         data['MinutesRequiredForCooking'] = $(' #minutesRequiredToCook').val();
 
-        return deferred.promise;
+        return data;
     }
 })();

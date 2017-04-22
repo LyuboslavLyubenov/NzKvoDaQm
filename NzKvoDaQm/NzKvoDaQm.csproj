@@ -207,6 +207,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\starwarsjs.svg" />
+    <Content Include="Content\images\big_loader.gif" />
     <Content Include="Content\recipe-details.css" />
     <Content Include="Content\search-bar.css" />
     <Content Include="Content\starwars.css" />
