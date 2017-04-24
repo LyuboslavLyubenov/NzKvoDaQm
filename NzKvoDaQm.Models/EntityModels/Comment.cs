@@ -5,7 +5,7 @@
 
     using NzKvoDaQm.Models.ViewModels;
 
-    public class Comment : IContainComments
+    public class Comment
     {
         public long Id
         {
@@ -23,16 +23,6 @@
         public virtual ApplicationUser Author
         {
             get; set;
-        }
-        
-        public virtual IList<Comment> Comments
-        {
-            get; set;
-        }
-
-        public Comment()
-        {
-            this.Comments = new List<Comment>();
         }
     }
 }

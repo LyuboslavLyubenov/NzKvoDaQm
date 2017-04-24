@@ -84,7 +84,18 @@
                     <h5>@review.Title</h5>
                     <div class="review-rating"></div>
                     <span class="review-author">@review.Author.UserName</span>
-                    <textarea class="review-body" disabled="disabled">@review.Body</textarea>
+                    <span class="review-body">@review.Body</span>
+                    <div class="review-comments" data-review-id="@review.Id">
+                        @foreach (var reviewComment in review.Comments)
+                        {
+                            <text>
+                                <div class="comment" data-id="@reviewComment.Id">
+                                    <span class="comment-author">@reviewComment.Author.UserName</span>
+                                    <span class="comment-body">@reviewComment.Text</span>
+                                </div>
+                            </text>
+                        }
+                    </div>
                 </div>
             }
 

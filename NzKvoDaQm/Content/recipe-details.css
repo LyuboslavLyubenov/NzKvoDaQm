@@ -35,3 +35,17 @@ label {
     padding: 20px 10px 20px 10px;
     text-align: left;
 }
+
+.review {
+    padding: 10px 0 10px 0;
+}
+
+.review-author {
+    display: block;
+}
+
+.review-body {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
