@@ -19,12 +19,12 @@
         {
             if (context == null)
             {
-                throw new ArgumentNullException(nameof(context));
+                throw new ArgumentNullException("context");
             }
 
             if (searchService == null)
             {
-                throw new ArgumentNullException(nameof(searchService));
+                throw new ArgumentNullException("searchService");
             }
 
             this.context = context;
