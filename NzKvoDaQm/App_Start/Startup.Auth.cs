@@ -59,9 +59,9 @@ namespace NzKvoDaQm
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+                appId: "1703516213278330",
+                appSecret: "09ce50ca55d5b9dbd8ead97fbc6f938c");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
